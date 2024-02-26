@@ -25,4 +25,13 @@ body .carousel-caption h5 {
     font-family: 'Playfair Display', serif !important;
 
 }
+
+body .custom-btn {
+    background-color: transparent;
+    border: none;
+}
+
+body button.card-footer:last-child {
+    background-color: #FEF5E6 !important;
+}
   

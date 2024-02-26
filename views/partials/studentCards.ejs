@@ -1,0 +1,30 @@
+<div class="container d-flex flex-wrap p-4">
+    <% providers[0].students.forEach(student => { %>
+
+        <div class="card" style="width: 16rem; height: 13rem;">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <%= student.name %>
+                <img src="./assets/maximize.png" width="16px" height="16px" />
+            </div>
+            <ul class="list-group list-group-flush">
+                
+            <% student.realWords.forEach(word => { %>
+
+                <li class="list-group-item"><%= word %></li>
+
+            <% }) %>
+                
+            </ul>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+                <button class="btn btn-link custom-btn">
+                    <img src="./assets/trash.png" width="24px"/>
+                </button>
+                <button class="btn btn-link custom-btn">
+                    <img src="./assets/edit.png" width="24px"/>
+                </button>
+            </div>
+        </div>
+
+    <% }) %>
+
+</div>

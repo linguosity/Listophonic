@@ -1,4 +1,5 @@
-const { Provider } = require("../models/Provider");
+const Provider = require("../models/Provider").Provider
+const Student = require("../models/Provider").Student
 
 //NEW | GET
 // render a new form
@@ -16,8 +17,8 @@ const create = async(req, res) => {
 // render the home page with indexed students
 const index = async(req,res) => {
     try{
-        //const providers = await Provider.find();
-        res.render('index.ejs');
+        const providers = await Provider.find();
+        res.render('index.ejs', {providers});
     }
     catch(err) {
         console.log(err);
