@@ -5,6 +5,7 @@ router.get('/', providerCtrl.index);
 router.get('/new', providerCtrl.new);
 router.post('/', providerCtrl.create);
 router.get('/seed', providerCtrl.seed);
+router.get('/openAI', providerCtrl.generate);
 //router.get('/:id', providerCtrl.show);
 //router.delete('/:id', providerCtrl.destroy);
 //router.get('/:id/edit', providerCtrl.edit);

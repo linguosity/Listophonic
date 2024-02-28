@@ -16,18 +16,26 @@
                           </tr>
                       </thead>
                       <tbody> 
-                          <% for(a=0; a < wordList.length ; a++){ %>
-                              <tr>
-                                  <td><%= wordList[a] %></td>
-                                  <td><!-- GPT3.5 return call phrases from wordList[a]-->></td>
-                                  <td><!-- GPT3.5 return call sentences from wordList[a]-->></td>
-                              </tr>
-                          <% } %>
+                          <form id="form<%=student._id%>">
+                            <% for(a=0; a < wordList.length; a++){ %>
+                                <tr>
+                                    <td><%= wordList[a] %></td>
+                                    <input value="<%=wordList[a]%>" form="form<%=student._id%>" name="words[]" type="hidden">
+                                    <td><!-- if(phrases){}--></td>
+                                    <td><!-- if(sentences){}--></td>
+                                </tr>
+                            <% } %>
+                          </form>
                       </tbody>
                   </table>
               </div>
           </div>
   <div class="modal-footer">
+        <!-- Button to generate phrases & sentences-->
+        <button type="button" class="btn btn-secondary" method="GET">
+          Generate
+        </button>
+      
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       <button type="button" class="btn btn-primary">Understood</button>
       </div>
