@@ -107,6 +107,7 @@ const seed = async (req, res) => {
 }
 
 const generate = async(req,res) => {
+    //call OPENAI API
     try{
         const data = JSON.stringify({
             model: "gpt-3.5-turbo-1106", // Update the model to the one you intend to use
@@ -178,9 +179,7 @@ const generate = async(req,res) => {
                 let sentences=newData.parameters.properties.sentences;
                 console.log(phrases, sentences);
 
-                //articList=(JSON.parse(newData));
-                //console.log("Data parsed", articList);
-                //console.log(articList.choices[0].message.content.phrases)
+                res.render(index.ejs, )
             });
         });
 
