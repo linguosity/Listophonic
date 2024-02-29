@@ -7,7 +7,7 @@ const session = require("express-session");
 
 
 //set port variable
-const port = 3000;
+const port = process.env.port;
 
 /*Import provider routes*/
 const providerRoutes = require("./routes/providerRoutes");
