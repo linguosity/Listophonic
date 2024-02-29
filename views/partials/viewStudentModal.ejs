@@ -1,6 +1,7 @@
 <div class="modal fade" id="<%= student._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
   <div class="modal-content">
+    <form action="/main/openai" method="GET" id="form<%=student._id%>">
       <div class="modal-header">
       <h1 class="modal-title fs-5" id="staticBackdropLabel"><%= student.name %></h1>
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -16,29 +17,35 @@
                           </tr>
                       </thead>
                       <tbody> 
-                          <form id="form<%=student._id%>">
+                          
                             <% for(a=0; a < wordList.length; a++){ %>
                                 <tr>
                                     <td><%= wordList[a] %></td>
                                     <input value="<%=wordList[a]%>" form="form<%=student._id%>" name="words[]" type="hidden">
-                                    <td><!-- if(phrases){}--></td>
-                                    <td><!-- if(sentences){}--></td>
+                                    <td><% if(phrases){ %>
+                                        <%= phrases.examples[a]; %>
+                                        <% } %>
+                                      </td>
+                                    <td><% if(sentences){ %>
+                                        <%= sentences.examples[a];%>
+                                        <% } %>
+                                      </td>
                                 </tr>
                             <% } %>
-                          </form>
+                          
                       </tbody>
                   </table>
               </div>
           </div>
-  <div class="modal-footer">
-        <!-- Button to generate phrases & sentences-->
-        <button type="button" class="btn btn-secondary" method="GET">
-          <a href="#" data-bs-toggle="tooltip" title="Expand words">Generate</a>
-        </button>
-      
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary">Understood</button>
-      </div>
+          <div class="modal-footer">
+          <!-- Button to generate phrases & sentences-->
+            <button type="submit" class="btn btn-secondary" method="GET">
+                Generate
+            </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </form>
   </div>
   </div>
 </div>

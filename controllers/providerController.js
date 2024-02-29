@@ -109,15 +109,18 @@ const seed = async (req, res) => {
 const generate = async(req,res) => {
     //call OPENAI API
     try{
+
+        const providers = await Provider.find();
+
         const data = JSON.stringify({
-            model: "gpt-3.5-turbo-1106", // Update the model to the one you intend to use
-            response_format: { "type": "json_object" },
+            model: "gpt-3.5-turbo-0125", // Update the model to the one you intend to use
+            response_format: { type: "json_object" },
             messages: [
                 { role: "system", content: `
                 You are an expert linguist with tremendous semantic and grammatical knowledge. Given a list of real or nonsense target words, 
                 you will create a list of phrases and simple sentences with the user's target words embedded Take a deep breath and work through the solution step by step. I'll tip you $20 upon completion. 
                 
-                Return responses in the following JSON format:
+                Return responses strictly in the following JSON format:
 
                     {
                         'name': 'Phrase and sentence generator',
@@ -130,14 +133,16 @@ const generate = async(req,res) => {
                             'phrases': {
                             'type': 'array',
                             'description: 'a list of exactly 10 verb phrases such as "find the book", prepositional phrases such as "under the sun" OR noun phrases such as "the blue dog" with the target word embedded'
+                            'examples': [],
                             },
 
                             'sentence': {
                             'type': 'array',
-                            'description': 'a list of exactly 10 short simple sentences with the target word embedded'
+                            'description': 'a list of exactly 10 short simple sentences with the target word embedded',
+                            'examples': [],
                             },
                         },
-                        required: ['phrases', 'sentences']
+                        'required': ['phrases', 'sentences']
                         }
                     }
 
@@ -179,12 +184,13 @@ const generate = async(req,res) => {
                 let sentences=newData.parameters.properties.sentences;
                 console.log(phrases, sentences);
 
-                res.render(index.ejs, )
+                res.render('index.ejs', {providers, phrases, sentences});
             });
         });
 
         apiRequest.on('error', error => {
             res.status(500).send(error.toString());
+            console.log("there was en error here");
         });
 
         apiRequest.write(data);
@@ -192,9 +198,11 @@ const generate = async(req,res) => {
 
 
     }catch(err){
-        console.log(err);
+        console.log("the error is", err);
     }
 }
+
+
 
 // export route variables for access within external files
 module.exports = {
