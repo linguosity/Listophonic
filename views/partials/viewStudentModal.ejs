@@ -24,11 +24,11 @@
                         <td><%= wordList[a] %></td>
                         <input value="<%=wordList[a]%>" form="form<%=student._id%>" name="words[]" type="hidden">
                         <td><% if(phrases && phrases.length>0){ %>
-                            <%= phrases.examples[a]; %>
+                            <%= phrases[a]; %>
                             <% } %>
                           </td>
                         <td><% if(sentences && sentences.length>0){ %>
-                            <%= sentences.examples[a];%>
+                            <%= sentences[a];%>
                             <% } %>
                           </td>
                     </tr>
@@ -38,6 +38,8 @@
         </table>
       </div>
       <input value="<%=student._id%>" form="form<%=student._id%>" name="student_ID" type="hidden">
+
+      <input value="<%=providers[0]._id%>" form="form<%=student._id%>" name="provider_ID" type="hidden">
       <div class="uk-modal-footer uk-text-right"><!-- Button to generate phrases -->
         <button type="submit" method="GET" class="uk-button-text">
           <span uk-icon="icon: bolt"></span>

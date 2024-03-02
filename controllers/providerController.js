@@ -119,14 +119,23 @@ const seed = async (req, res) => {
 
 const generate = async(req,res) => {
     
-    
     //save wordlist key value pairs from URL as local array 'words'
     console.log("sent from app", req.query);
     let words=req.query.words;
 
     //save studentDI key value pair as local studentID
     console.log("studentID", req.query.student_ID);
+    let studentID = req.query.student_ID;
+    let providerID = req.query.provider_ID;
 
+    try{ 
+        const provider = await Provider.findById(providerID);
+        const student = await provider.students.id(studentID);
+        console.log(student);
+    } catch(err) {
+        console.log(err);
+    }
+    
     try{
         //call OPENAI API
         const providers = await Provider.find();
@@ -136,7 +145,7 @@ const generate = async(req,res) => {
             response_format: { type: "json_object" },
             messages: [
                 { role: "system", content: `
-                You are an expert linguist with tremendous semantic and grammatical knowledge. Given a list of real or nonsense target words, 
+                You are an expert linguist with tremendous semantic and grammatical knowledge. Given a list of real or nonsense words, 
                 you will create a list of phrases and simple sentences with the user's target words [${words}] embedded Take a deep breath and work through the solution step by step. I'll tip you $20 upon completion. 
                 
                 Return responses strictly in the following JSON format:
@@ -151,13 +160,13 @@ const generate = async(req,res) => {
                         'properties': {
                             'phrases': {
                             'type': 'array',
-                            'description: 'a list of exactly 10 verb phrases such as "find the book", prepositional phrases such as "under the sun" OR noun phrases such as "the blue dog" with the target words [${words}] embedded'
+                            'description: 'a list of exactly 10 prepositional phrases such as "in the book" OR noun phrases such as "the blue dog" with the following words embedded: ${words}'
                             'examples': [],
                             },
 
                             'sentence': {
                             'type': 'array',
-                            'description': 'a list of exactly 10 short simple sentences with the target words [${words}] embedded',
+                            'description': 'a list of exactly 10 short simple sentences with the following words embedded: ${words}',
                             'examples': [],
                             },
                         },
@@ -192,19 +201,41 @@ const generate = async(req,res) => {
                 data += chunk;
             });
 
-            apiResponse.on('end', () => {
+            apiResponse.on('end', async () => {
                 //console.log("Raw data:", data);
-                let newData=JSON.parse(data);
-                newData=JSON.parse((newData.choices[0].message.content));
+                let newData = JSON.parse(data);
+                newData = JSON.parse(newData.choices[0].message.content);
 
                 //
-                let phrases=newData.parameters.properties.phrases;
-                let sentences=newData.parameters.properties.sentences;
-                console.log(phrases, sentences);
+                console.log(newData.parameters.properties.sentences);
+                let phrases = newData.parameters.properties.phrases.examples;
+                let sentences = newData.parameters.properties.sentences.examples;
+                console.log("OpenAI api call:", phrases, sentences);
 
-                //save phrases and sentences 
+                try{
+                    //save phrases and sentences in target Student schema & updated sub and parent schemas
+                    const provider = await Provider.findById(providerID);
+                    const student = provider.students.id(studentID);
+
+                    console.log("found provider:  ", provider);
+                    console.log("found student:  ", student);
+
+                    student.phrases=phrases;
+                    student.sentences=sentences;
+                    await provider.save();
+                    //const updatedStudent = await Student.findByIdAndUpdate(studentID, {phrases: phrases, sentences: sentences}, {new:true});
+                    //console.log("updated student", updatedStudent);
+                    //updatedStudent.save();
+
+                    //save phrases and sentences 
+                    //res.render('index.ejs', {providers, phrases, sentences});
+                    res.redirect('/');
+
+                }catch(err){
+                    console.log(err);
+                }
+
                 
-                res.render('index.ejs', {providers, phrases, sentences});
             });
         });
 
@@ -222,6 +253,30 @@ const generate = async(req,res) => {
     }
 }
 
+const destroy = async(req,res) => {
+    try{
+        //receive providerID and studentID
+        console.log(req.body);
+        let providerID = req.body.provider_id;
+        let studentID = req.body.student_id;
+
+        const provider = await Provider.findById(providerID);
+        const student = provider.students.id(studentID);
+        
+        await Provider.updateOne(
+            { _id: providerID }, // Match the provider document
+            { $pull: { students: { _id: studentID } } } // Remove the student from the students array
+        );
+        
+        
+
+        res.redirect('/');
+
+    }catch(err){
+        console.log(err);
+    }
+}
+
 
 
 // export route variables for access within external files
@@ -232,7 +287,7 @@ module.exports = {
     //show,
     seed, 
     generate,
-    //destroy,
+    destroy,
     //edit: editForm,
     //update*/
 }

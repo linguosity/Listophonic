@@ -19,7 +19,24 @@
                 </ul>
             </div>
             <div class="uk-card-footer uk-flex uk-flex-between">
-                <a href="" uk-icon="icon: trash"></a>
+                <button class="uk-button uk-button-text uk-button-small" type="button"><a href="" uk-icon="icon: trash"></a></button>
+                <div uk-dropdown="mode: click">
+                    <ul class="uk-list uk-list-divider uk-list-muted uk-list-collapse">
+                        <form action="/main/?_method=DELETE" method="POST">
+                            <li class="uk-text-danger">
+                                <div uk-form-custom>
+                                    <input type="hidden" value="<%= providers[0]._id %>" name="provider_id">
+                                    <input type="hidden" value="<%= student._id%>" name="student_id">
+                                    <button class="uk-button uk-button-text uk-text-danger" type="submit" tabindex="-1">
+                                        DELETE
+                                    </button>
+                                </div>
+                            </li>
+                        <li class="uk-text-muted uk-text-small">CANCEL</li>
+                        </form>
+                    </ul>
+                </div> 
+                
                 <a href="" uk-icon="icon: file-edit"></a>
             </div>
         </div>
