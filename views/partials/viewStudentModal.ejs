@@ -1,51 +1,53 @@
-<div class="modal fade" id="<%= student._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-  <div class="modal-content">
-    <form action="/main/openai" method="GET" id="form<%=student._id%>">
-      <div class="modal-header">
-      <h1 class="modal-title fs-5" id="staticBackdropLabel"><%= student.name %></h1>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-          <div class="modal-body" >
-              <div class="container-fluid">
-                  <table class="table table-sm">
-                      <thead>
-                          <tr>
-                              <th scope="col">Word</th>
-                              <th scope="col">Phrase</th>
-                              <th scope="col">Sentence</th>
-                          </tr>
-                      </thead>
-                      <tbody> 
-                          
-                            <% for(a=0; a < wordList.length; a++){ %>
-                                <tr>
-                                    <td><%= wordList[a] %></td>
-                                    <input value="<%=wordList[a]%>" form="form<%=student._id%>" name="words[]" type="hidden">
-                                    <td><% if(phrases){ %>
-                                        <%= phrases.examples[a]; %>
-                                        <% } %>
-                                      </td>
-                                    <td><% if(sentences){ %>
-                                        <%= sentences.examples[a];%>
-                                        <% } %>
-                                      </td>
-                                </tr>
+<!-- Modals-->
+<div id="modal-<%= student._id%>" uk-modal>
+  <div class="uk-modal-dialog uk-border-rounded">
+    <button class="uk-modal-close-default" type="button" uk-close>
+    </button>
+    <div class="uk-modal-header">
+        <h2 class="uk-modal-title"><%= student.name %></h2>
+    </div>
+
+    <form action="/main/openAI" method="GET" id="form<%=student._id%>">
+      <div class="uk-modal-body">
+        <table class="uk-table uk-table-responsive uk-table-divider">
+          <thead>
+              <tr>
+                  <th>Word</th>
+                  <th>Phrase</th>
+                  <th>Sentence</th>
+              </tr>
+          </thead>
+          <tbody> 
+              
+                <% for(a=0; a < wordList.length; a++){ %>
+                    <tr>
+                        <td><%= wordList[a] %></td>
+                        <input value="<%=wordList[a]%>" form="form<%=student._id%>" name="words[]" type="hidden">
+                        <td><% if(phrases && phrases.length>0){ %>
+                            <%= phrases.examples[a]; %>
                             <% } %>
-                          
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-          <div class="modal-footer">
-          <!-- Button to generate phrases & sentences-->
-            <button type="submit" class="btn btn-secondary" method="GET">
-                Generate
-            </button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Understood</button>
-        </div>
-      </form>
-  </div>
+                          </td>
+                        <td><% if(sentences && sentences.length>0){ %>
+                            <%= sentences.examples[a];%>
+                            <% } %>
+                          </td>
+                    </tr>
+                <% } %>
+          
+          </tbody>
+        </table>
+      </div>
+      <input value="<%=student._id%>" form="form<%=student._id%>" name="student_ID" type="hidden">
+      <div class="uk-modal-footer uk-text-right"><!-- Button to generate phrases -->
+        <button type="submit" method="GET" class="uk-button-text">
+          <span uk-icon="icon: bolt"></span>
+        </button> 
+
+        <button type="submit" method="GET" class="uk-button-text">
+          <span uk-icon="icon: pencil"></span>
+        </button> 
+      </div>
+
+    </form>
   </div>
 </div>

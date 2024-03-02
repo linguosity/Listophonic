@@ -8,7 +8,9 @@ const studentSchema = new mongoose.Schema({
     realWords: {type: [String], required: true},
     nonsenseWords: {type: [String], required: true},
     maxSyllables: {type: Number, required: true},
-    phono: {type: Boolean, required: true}
+    phono: {type: Boolean, required: true},
+    phrases: [String],
+    sentences: [String],
 
 }, {timestamps: true});
 

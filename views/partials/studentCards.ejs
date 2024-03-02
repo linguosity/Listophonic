@@ -1,63 +1,33 @@
-<div class="container d-flex flex-wrap p-4">
+<main class="uk-grid-medium uk-margin-medium-top" style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: center;">
     <% providers[0].students.forEach(student => { %>
         <!-- Card -->
-        <div class="card mx-3 shadow" style="width: 16rem; height: 21.8em;">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <%= student.name %>
-                <button class="btn btn-link custom-btn" type="button" data-bs-toggle="modal" data-bs-target="#<%= student._id %>">
-                    
-                    <img src="./assets/maximize.png" width="16px" height="16px" />
-                 </button>
+        <div class="uk-card-small uk-padding-small uk-border-rounded uk-box-shadow-small uk-box-shadow-hover-large uk-margin-medium-right" style="width: 12em;">
+            <div class="uk-card-header uk-flex-between" style="display: flex; flex-direction: row;">
+                <h5 class="uk-card-title"><%= student.name %></h3>
+                <a href="#modal-<%= student._id%>" uk-toggle uk-icon="icon: push">
+                </a>
             </div>
-            <ul class="list-group list-group-flush">
-            <% let wordList = student.realWords.concat(student.nonsenseWords); %>
-            <% wordList.forEach(word => { %>
-
-                <li class="list-group-item"><%= word %></li>
-
-            <% }) %>
-                
-            </ul>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <button class="btn btn-link custom-btn">
-                    <img src="./assets/trash.png" width="24px"/>
-                </button>
-                <button class="btn btn-link custom-btn">
-                    <img src="./assets/edit.png" width="24px"/>
-                </button>
+            <div class="uk-card-body">
+                <ul class="uk-list uk-list-striped">
+                    <% let wordList = student.realWords.concat(student.nonsenseWords); %>
+                    <% wordList.forEach(word => { %>
+        
+                        <li><%= word %></li>
+        
+                    <% }) %>
+                        
+                </ul>
+            </div>
+            <div class="uk-card-footer uk-flex uk-flex-between">
+                <a href="" uk-icon="icon: trash"></a>
+                <a href="" uk-icon="icon: file-edit"></a>
             </div>
         </div>
 
-        <!--Modal id="exampleModal"-->
-        <%- include ("viewStudentModal", {student: student, wordList: wordList, phrases, sentences}) %>
+        
+        <%- include ("viewStudentModal", {student: student, wordList: wordList, phrases: student.phrases, sentences: student.sentences}) %>
         
     <% }) %>
+</main>
 
-</div>
 
-
-<!-- 
-    Button trigger modal 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Launch static backdrop modal
-  </button>
-  
-  Modal 
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div>
-      </div>
-    </div>
-  </div>
--->

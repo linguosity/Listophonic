@@ -17,6 +17,7 @@
     "express-session": "^1.18.0",
     "method-override": "^3.0.0",
     "mongoose": "^8.2.0",
-    "openai": "^4.28.0"
+    "openai": "^4.28.0",
+    "uikit": "^3.19.0"
   }
 }

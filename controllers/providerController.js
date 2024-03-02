@@ -22,6 +22,7 @@ const create = async(req, res) => {
 const index = async(req,res) => {
     try{
         const providers = await Provider.find();
+        
         res.render('index.ejs', {providers});
     }
     catch(err) {
@@ -53,6 +54,8 @@ const seed = async (req, res) => {
                         nonsenseWords: ["kip", "kop", "kak"],
                         maxSyllables: 2,
                         phono: true,
+                        phrases: [],
+                        sentences: [],
                     },
                     {
                         name: "Bob",
@@ -63,6 +66,8 @@ const seed = async (req, res) => {
                         nonsenseWords: ["mip", "mop", "mam"],
                         maxSyllables: 3,
                         phono: true,
+                        phrases: [],
+                        sentences: [],
                     },
                     {
                         name: "Charlie",
@@ -73,6 +78,8 @@ const seed = async (req, res) => {
                         nonsenseWords: ["fop", "fip", "faf"],
                         maxSyllables: 4,
                         phono: true,
+                        phrases: [],
+                        sentences: [],
                     },
                     {
                         name: "Diana",
@@ -83,6 +90,8 @@ const seed = async (req, res) => {
                         nonsenseWords: ["sip", "sop", "sas"],
                         maxSyllables: 5,
                         phono: true,
+                        phrases: [],
+                        sentences: [],
                     },
                     {
                         name: "Emily",
@@ -93,13 +102,15 @@ const seed = async (req, res) => {
                         nonsenseWords: ["thip", "thop", "thap"],
                         maxSyllables: 6,
                         phono: true,
+                        phrases: [],
+                        sentences: [],
                     },
                 ],
             }])
         
         //after creating see data redirect to home
-        res.redirect('/main')
-        console.log(provider);
+        //res.redirect('/main')
+        //console.log(provider);
 
     }catch(err){
         console.log(err)
@@ -107,9 +118,17 @@ const seed = async (req, res) => {
 }
 
 const generate = async(req,res) => {
-    //call OPENAI API
-    try{
+    
+    
+    //save wordlist key value pairs from URL as local array 'words'
+    console.log("sent from app", req.query);
+    let words=req.query.words;
 
+    //save studentDI key value pair as local studentID
+    console.log("studentID", req.query.student_ID);
+
+    try{
+        //call OPENAI API
         const providers = await Provider.find();
 
         const data = JSON.stringify({
@@ -118,7 +137,7 @@ const generate = async(req,res) => {
             messages: [
                 { role: "system", content: `
                 You are an expert linguist with tremendous semantic and grammatical knowledge. Given a list of real or nonsense target words, 
-                you will create a list of phrases and simple sentences with the user's target words embedded Take a deep breath and work through the solution step by step. I'll tip you $20 upon completion. 
+                you will create a list of phrases and simple sentences with the user's target words [${words}] embedded Take a deep breath and work through the solution step by step. I'll tip you $20 upon completion. 
                 
                 Return responses strictly in the following JSON format:
 
@@ -132,13 +151,13 @@ const generate = async(req,res) => {
                         'properties': {
                             'phrases': {
                             'type': 'array',
-                            'description: 'a list of exactly 10 verb phrases such as "find the book", prepositional phrases such as "under the sun" OR noun phrases such as "the blue dog" with the target word embedded'
+                            'description: 'a list of exactly 10 verb phrases such as "find the book", prepositional phrases such as "under the sun" OR noun phrases such as "the blue dog" with the target words [${words}] embedded'
                             'examples': [],
                             },
 
                             'sentence': {
                             'type': 'array',
-                            'description': 'a list of exactly 10 short simple sentences with the target word embedded',
+                            'description': 'a list of exactly 10 short simple sentences with the target words [${words}] embedded',
                             'examples': [],
                             },
                         },
@@ -148,8 +167,7 @@ const generate = async(req,res) => {
 
                 ` },
                 { role: "user", content: `
-                    realWords: ["cat", "kite", "key"],
-                    nonsenseWords: ["kip", "kop", "kak"]
+                    'wordList': ${words}
                 ` }
                 // Add more messages as needed
             ]
@@ -184,6 +202,8 @@ const generate = async(req,res) => {
                 let sentences=newData.parameters.properties.sentences;
                 console.log(phrases, sentences);
 
+                //save phrases and sentences 
+                
                 res.render('index.ejs', {providers, phrases, sentences});
             });
         });
