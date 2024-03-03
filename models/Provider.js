@@ -1,16 +1,18 @@
 const mongoose = require("mongoose");
 
 const studentSchema = new mongoose.Schema({
-    name: {type: String, required: true},
+    firstName: {type: String, required: true},
+    lastName: String,
     targetSound: {type: String, required: true},
-    grade: {type: String, required: true},
-    age: {type: Number, required: true},
+    grade: String,
+    age: Number,
     realWords: {type: [String], required: true},
-    nonsenseWords: {type: [String], required: true},
+    nonsenseWords: [String],
     maxSyllables: {type: Number, required: true},
-    phono: {type: Boolean, required: true},
+    phono: String,
     phrases: [String],
     sentences: [String],
+    wordPosition: {type: String, required: true}
 
 }, {timestamps: true});
 

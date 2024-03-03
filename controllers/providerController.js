@@ -14,7 +14,22 @@ const newForm = (req,res) => {
 //CREATE | POST
 // manipulate data
 const create = async(req, res) => {
+        try{
+            console.log(req.body);
+            console.log(req.query);
+            const providers = await Provider.findById(req.query.provider_id);
 
+            const newStudent = await Student.create(req.body);
+            providers.students.push(newStudent);
+
+            await providers.save();
+
+            res.redirect('/main');
+        }catch(err){
+            console.log(err)
+        }
+        
+    
 };
 
 //INDEX | GET
@@ -46,64 +61,32 @@ const seed = async (req, res) => {
                 email: "your_email@example.com",
                 students: [
                     {
-                        name: "Alice",
-                        targetSound: "k",
-                        grade: "Kindergarten",
-                        age: 5,
-                        realWords: ["cat", "kite", "key"],
-                        nonsenseWords: ["kip", "kop", "kak"],
-                        maxSyllables: 2,
-                        phono: true,
-                        phrases: [],
-                        sentences: [],
-                    },
-                    {
-                        name: "Bob",
-                        targetSound: "m",
-                        grade: "1st Grade",
-                        age: 6,
-                        realWords: ["map", "milk", "man"],
-                        nonsenseWords: ["mip", "mop", "mam"],
-                        maxSyllables: 3,
-                        phono: true,
-                        phrases: [],
-                        sentences: [],
-                    },
-                    {
-                        name: "Charlie",
-                        targetSound: "f",
-                        grade: "2nd Grade",
+                        firstName: 'John',
+                        lastName: 'Doe',
+                        targetSound: 's',
+                        grade: '1st',
                         age: 7,
-                        realWords: ["fish", "face", "fun"],
-                        nonsenseWords: ["fop", "fip", "faf"],
-                        maxSyllables: 4,
-                        phono: true,
+                        realWords: ['sun', 'sand', 'sock'],
+                        nonsenseWords: ['sib', 'sul', 'sep'],
+                        maxSyllables: 2,
+                        phono: 'initial',
                         phrases: [],
                         sentences: [],
+                        wordPosition: 'initial'
                     },
                     {
-                        name: "Diana",
-                        targetSound: "s",
-                        grade: "3rd Grade",
-                        age: 8,
-                        realWords: ["sun", "sock", "sit"],
-                        nonsenseWords: ["sip", "sop", "sas"],
-                        maxSyllables: 5,
-                        phono: true,
+                        firstName: 'ally',
+                        lastName: 'Doe',
+                        targetSound: 's',
+                        grade: '2st',
+                        age: 14,
+                        realWords: ['sun', 'sand', 'sock', 'sore'],
+                        nonsenseWords: ['sul', 'sep'],
+                        maxSyllables: 2,
+                        phono: 'artic',
                         phrases: [],
                         sentences: [],
-                    },
-                    {
-                        name: "Emily",
-                        targetSound: "th",
-                        grade: "4th Grade",
-                        age: 9,
-                        realWords: ["thin", "think", "three"],
-                        nonsenseWords: ["thip", "thop", "thap"],
-                        maxSyllables: 6,
-                        phono: true,
-                        phrases: [],
-                        sentences: [],
+                        wordPosition: 'initial'
                     },
                 ],
             }])
@@ -160,13 +143,13 @@ const generate = async(req,res) => {
                         'properties': {
                             'phrases': {
                             'type': 'array',
-                            'description: 'a list of exactly 10 prepositional phrases such as "in the book" OR noun phrases such as "the blue dog" with the following words embedded: ${words}'
+                            'description: 'a list of exactly 6 prepositional phrases such as "in the book" OR noun phrases such as "the blue dog" with the following words embedded: ${words}'
                             'examples': [],
                             },
 
                             'sentence': {
                             'type': 'array',
-                            'description': 'a list of exactly 10 short simple sentences with the following words embedded: ${words}',
+                            'description': 'a list of exactly 6 short simple sentences with the following words embedded: ${words}',
                             'examples': [],
                             },
                         },

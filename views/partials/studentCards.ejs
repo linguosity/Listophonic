@@ -3,12 +3,12 @@
         <!-- Card -->
         <div class="uk-card-small uk-padding-small uk-border-rounded uk-box-shadow-small uk-box-shadow-hover-large uk-margin-medium-right" style="width: 12em;">
             <div class="uk-card-header uk-flex-between" style="display: flex; flex-direction: row;">
-                <h5 class="uk-card-title"><%= student.name %></h3>
-                <a href="#modal-<%= student._id%>" uk-toggle uk-icon="icon: push">
+                <h3 class="uk-card-title uk-text-center uk-text-default"><%= `${student.firstName} ${student.lastName}`  %></h3>
+                <a href="#modal-<%= student._id%>" uk-toggle class="uk-icon-link" uk-icon="icon: push">
                 </a>
             </div>
             <div class="uk-card-body">
-                <ul class="uk-list uk-list-striped">
+                <ul class="uk-list uk-list-divider">
                     <% let wordList = student.realWords.concat(student.nonsenseWords); %>
                     <% wordList.forEach(word => { %>
         
@@ -19,9 +19,9 @@
                 </ul>
             </div>
             <div class="uk-card-footer uk-flex uk-flex-between">
-                <button class="uk-button uk-button-text uk-button-small" type="button"><a href="" uk-icon="icon: trash"></a></button>
+                <button class="uk-button uk-button-text uk-button-small" type="button"><a href="" class="uk-icon-link" uk-icon="icon: trash"></a></button>
                 <div uk-dropdown="mode: click">
-                    <ul class="uk-list uk-list-divider uk-list-muted uk-list-collapse">
+                    <ul class="uk-list uk-list-muted uk-list-collapse">
                         <form action="/main/?_method=DELETE" method="POST">
                             <li class="uk-text-danger">
                                 <div uk-form-custom>
@@ -32,12 +32,12 @@
                                     </button>
                                 </div>
                             </li>
-                        <li class="uk-text-muted uk-text-small">CANCEL</li>
+                        <li class="uk-text-muted uk-text-small"><a href="#">CANCEL</a></li>
                         </form>
                     </ul>
                 </div> 
                 
-                <a href="" uk-icon="icon: file-edit"></a>
+                <a href="" class="uk-icon-link" uk-icon="icon: file-edit"></a>
             </div>
         </div>
 
