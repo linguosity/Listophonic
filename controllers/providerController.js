@@ -251,14 +251,37 @@ const destroy = async(req,res) => {
             { $pull: { students: { _id: studentID } } } // Remove the student from the students array
         );
         
-        
-
         res.redirect('/');
 
     }catch(err){
         console.log(err);
     }
 }
+
+const update =  async (req, res)=>{
+    try{
+        //set value for id's providerID and studentID
+        console.log("body: ", req.body);
+        console.log("query: ", req.query);
+        let providerID = req.query.provider_id;
+        let studentID = req.body.student_id;
+
+        //find provider and user by ID
+        const provider = await Provider.findById(providerID);
+        const foundStudent = provider.students.id(studentID);
+
+        //update student with data from reqbody
+        foundStudent = await Student.findByIdAndUpdate(studentID, req.body, {new:true});
+        
+        await provider.save();
+
+        res.redirect('/');
+
+    }catch(err){
+        console.log(err)
+    }
+}
+
 
 
 
@@ -272,5 +295,5 @@ module.exports = {
     generate,
     destroy,
     //edit: editForm,
-    //update*/
+    update
 }

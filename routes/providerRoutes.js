@@ -9,6 +9,6 @@ router.get('/openAI', providerCtrl.generate);
 //router.get('/:id', providerCtrl.show);
 router.delete('/', providerCtrl.destroy);
 //router.get('/:id/edit', providerCtrl.edit);
-//router.put('/:id', providerCtrl.update);
+router.put('/', providerCtrl.update);
 
 module.exports = router;

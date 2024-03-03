@@ -6,14 +6,12 @@
 
                 <div class="uk-navbar-center-left">
                     <ul class="uk-navbar-nav">
-                        <li class="uk-active"><a href="" uk-icon="icon: sign-in" class="uk-icon-link">Sign-in</a></li>
-                        <li class="uk-active"><a href="" uk-icon="icon: sign-out" class="uk-icon-link">Sign-out</a></li>
                         <li>
                             <a href="#">Student</a>
-                            <div class="uk-navbar-dropdown">
-                                <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    <li class="uk-active"><a href="#">Active</a></li>
-                                    <li>
+                            <div uk-dropdown="animation: slide-top; animate-out: true"> 
+                                <ul class="uk-nav uk-dropdown-nav">
+                                    <li class="uk-active"><a href="#"></a></li>
+                                    <li> 
                                         <a href="#offcanvas-usage" uk-toggle>New</a>
 
                                         <div id="offcanvas-usage" uk-offcanvas>
@@ -186,7 +184,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li><a href="#">Item</a></li>
+                                    <li><a href="#"></a></li>
                                 </ul>
                             </div>
                         </li>
@@ -195,13 +193,29 @@
                 <span class="uk-navbar-item uk-logo" href="#"><img src="/assets/listophonic.png" width="40px"> Listophonic </span>
                 <div class="uk-navbar-center-right">
                     <ul class="uk-navbar-nav">
-                        <li><a href="#">Item</a></li>
-                        <li><a href="#">Item</a></li>
+                        
+                        <li class="uk-active uk-text-light"><a href="" uk-icon="icon: sign-in" class="uk-icon-link">Sign-in</a></li>
+                        <div class="uk-width-large" uk-dropdown>
+                            <form class="uk-form">
+                                <div class="uk-drop-grid uk-child-width-1-2@m" uk-grid>
+                                    
+                                    <div class="uk-form-password">
+                                        <label>User</label>
+                                        <input type="user">
+                                        <a href="" class="uk-form-password-toggle" data-uk-form-password></a>
+                                    </div>
+                                    <div class="uk-form-password">
+                                        <label>password</label>
+                                        <input type="password">
+                                        <a href="" class="uk-form-password-toggle" data-uk-form-password></a>
+                                    </div>
+                                    <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">Button</button>
+                                </div>
+                            </form>
+                        </div>    
                     </ul>
                 </div>
-
             </div>
-
         </div>
     </div>
 </nav>

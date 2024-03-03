@@ -1,0 +1,133 @@
+<div id="offcanvas-edit" uk-offcanvas>
+    <div class="uk-offcanvas-bar">
+
+        <!-- Create new student form & pass provider id in URL-->
+        <form action="/main/?_method=PUT&provider_id=<%= providers[0]._id%>" method="POST" class="uk-form-stacked">
+            <% let gradeArray = ['prek', 'tk', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th']; %>
+            <% let soundArray = [ "p", "b", "t", "d", "k", "g", "f", "v", "θ", "ð", "s", "z", "ʃ", "ʒ", "h", "tʃ", "dʒ", "m", "n", "ŋ", "l", "r", "w", "j",
+            "pr", "br", "kr", "gr", "fr", "θr", "ʃr", "tʃr", "dʒr", "sn", "sl", "st", "sp", "sm", "spr", "str", "skr", "skw", "spl", "skl", "sʃr"
+        ];%>
+            <!-- Add first and last name-->
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text"><span uk-icon="user"></span> New Student</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input uk-form-width-small" id="form-stacked-text" type="text" placeholder="first name" name="firstName" value="<%=student.firstName%>">
+                    <input class="uk-input uk-form-width-small uk-margin" id="form-stacked-text" type="text" placeholder="last name" name="lastName" value="<%=student.lastName%>">
+                </div>
+            </div>
+
+            <!-- Add age-->
+            <div class="uk-child-width-1-3 uk-text-center" uk-grid>
+                <div>
+                    <label class="uk-form-label" for="form-stacked-select"><span uk-icon="bookmark"></span> Age</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select uk-form-width-xsmall" id="form-stacked-select" name="age">
+                            <% for(i=0;i<12;i++) { %>
+                                <% if(i==student.age){ %>
+                                    <option value="<%=student.age%>" selected><%=student.age%></option>
+                                <% } else { %>
+                                    <option value="<%=i%>"><%=i%></option>
+                                <%} %>
+                            <% } %>
+                            
+                            
+
+                        </select>
+                    </div>
+                </div>
+                <!-- Add grade-->
+                <div>
+                    <label class="uk-form-label" for="form-stacked-select"><span uk-icon="bookmark"></span> Grade</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select uk-form-width-xsmall" id="form-stacked-select" name="grade" value="5th">
+                            <% for(a=0;a<gradeArray.length;a++) { %>
+                                <% if(gradeArray[a]===student.grade){ %>
+                                    <option value="<%=student.grade%>" selected><%=student.grade%></option>
+                                <% } else { %>
+                                    <option value="<%=gradeArray[a]%>"><%=gradeArray[a]%></option>
+                                <%} %>
+                            <% } %>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- Add target sound-->
+            <div class="uk-text-center" uk-grid>
+                <div class="uk-width-auto@m">
+                    <label class="uk-form-label" for="form-stacked-select"><span uk-icon="crosshairs"></span> Target</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-select uk-form-width-xsmall" id="form-stacked-select" name="targetSound">
+                            <% for(b=0;b<soundArray.length;b++) { %>
+                                <% if(soundArray[b]===student.targetSound){ %>
+                                    <option value="<%=student.targetSound %>" selected><%=student.targetSound%></option>
+                                <% } else { %>
+                                    <option value="<%=soundArray[b]%>"><%=soundArray[b]%></option>
+                                <%} %>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+            
+                <!-- Add word position-->
+                <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid uk-flex-center uk-width-auto@m">
+                    <label><input class="uk-radio" type="radio" name="wordPosition" <% let wordPos = student.wordPosition === 'initial'? 'checked' : '' %>>initial</label>
+                    <label><input class="uk-radio" type="radio" name="wordPosition">medial</label>
+                    <label><input class="uk-radio" type="radio" name="wordPosition">final</label>
+                </div>
+            </div>
+
+            <!-- Add max syllables-->
+            <div class="uk-margin">
+                <label>Max syllables</label>
+                <input class="uk-range" type="range" name="maxSyllables" value="student.maxSyllables" min="1" max="5" step="1" aria-label="Range" oninput="sliderFunction(this)" uk-tooltip="hello">
+            </div>
+           
+            <!-- add 6 words -->
+            <div class="uk-grid-small uk-grid-column-small uk-grid-row-small" uk-grid>
+                <label class="uk-form-label" for="form-stacked-select"><span uk-icon="file-text" ></span> Words</label>
+                <div class="uk-grid uk-grid-column-small uk-grid-row-small">
+                    <div class="uk-width-1-2">
+                        <input class="uk-input uk-form-small" type="text" aria-label="20" name="realWords[]" value="<%=student.realWords[0];%>">
+                    </div>
+                    <div class="uk-width-1-2">
+                        <input class="uk-input uk-form-small" type="text" aria-label="20" name="realWords[]" value="<%=student.realWords[1];%>">
+                    </div>
+                </div>
+                <div class="uk-grid uk-grid-column-small uk-grid-row-small">
+                    <div class="uk-width-1-2">
+                        <input class="uk-input uk-form-small" type="text" aria-label="20" name="realWords[]" value="<%=student.realWords[2];%>">
+                    </div>
+                    <div class="uk-width-1-2">
+                        <input class="uk-input uk-form-small" type="text" aria-label="20" name="realWords[]" value="<%=student.realWords[3];%>">
+                    </div>
+                </div>
+                <div class="uk-grid uk-grid-column-small uk-grid-row-small">
+                    <div class="uk-width-1-2">
+                        <input class="uk-input uk-form-small" type="text" aria-label="20" name="realWords[]" value="<%=student.realWords[4];%>">
+                    </div>
+                    <div class="uk-width-1-2">
+                        <input class="uk-input uk-form-small" type="text"aria-label="20" name="realWords[]" value="<%=student.realWords[5];%>">
+                    </div>
+                </div>
+                
+                
+            </div>
+            <!-- Add phono/artic -->
+            <div class="uk-grid-small uk-child-width-auto uk-grid uk-flex-center">
+               <% if(student.phono === 'phono') { %>
+                    <label><input class="uk-radio" type="radio" name="phono" checked>artic</label>
+                    <label><input class="uk-radio" type="radio" name="phono">phono</label>
+                <% }else { %>
+                    <label><input class="uk-radio" type="radio" name="phono">artic</label>
+                     <label><input class="uk-radio" type="radio" name="phono" checked>phono</label>
+                <% } %>
+                
+            </div>
+            <!-- Add studentID-->
+            <input value="<%=student._id %>" name="student_id" type="hidden">
+            <!-- Submit-->
+            <button class="uk-button uk-margin uk-button-primary uk-flex-centertype="submit" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
