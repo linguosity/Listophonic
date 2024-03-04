@@ -12,7 +12,8 @@ const studentSchema = new mongoose.Schema({
     phono: String,
     phrases: [String],
     sentences: [String],
-    wordPosition: {type: String, required: true}
+    wordPosition: {type: String, required: true},
+    excludedSounds: [Array],
 
 }, {timestamps: true});
 

@@ -9,7 +9,7 @@
                         <li>
                             <a href="#">Student</a>
                             <div uk-dropdown="animation: slide-top; animate-out: true"> 
-                                <ul class="uk-nav uk-dropdown-nav">
+                                <ul class="uk-nav uk-dropdown-nav uk-form-small">
                                     <li class="uk-active"><a href="#"></a></li>
                                     <li> 
                                         <a href="#offcanvas-usage" uk-toggle>New</a>
@@ -69,71 +69,83 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <hr class="uk-divider-icon">
                                                     <!-- Add target sound-->
                                                     <div class="uk-text-center" uk-grid>
                                                         <div class="uk-width-auto@m">
                                                             <label class="uk-form-label" for="form-stacked-select"><span uk-icon="crosshairs"></span> Target</label>
                                                             <div class="uk-form-controls">
-                                                                <select class="uk-select uk-form-width-xsmall" id="form-stacked-select" name="targetSound">
-                                                                    <option value="p">p</option>
-                                                                    <option value="b">b</option>
-                                                                    <option value="t">t</option>
-                                                                    <option value="d">d</option>
-                                                                    <option value="k">k</option>
-                                                                    <option value="g">g</option>
-                                                                    <option value="f">f</option>
-                                                                    <option value="v">v</option>
-                                                                    <option value="θ">θ</option>
-                                                                    <option value="ð">ð</option>
-                                                                    <option value="s">s</option>
-                                                                    <option value="z">z</option>
-                                                                    <option value="ʃ">ʃ</option>
-                                                                    <option value="ʒ">ʒ</option>
-                                                                    <option value="h">h</option>
-                                                                    <option value="tʃ">tʃ</option>
-                                                                    <option value="dʒ">dʒ</option>
-                                                                    <option value="m">m</option>
-                                                                    <option value="n">n</option>
-                                                                    <option value="ŋ">ŋ</option>
-                                                                    <option value="l">l</option>
-                                                                    <option value="r">r</option>
-                                                                    <option value="w">w</option>
-                                                                    <option value="j">j</option>
-                                                                    <!-- Two-element clusters -->
-                                                                    <option value="pr">pr</option>
-                                                                    <option value="br">br</option>
-                                                                    <option value="kr">kr</option>
-                                                                    <option value="gr">gr</option>
-                                                                    <option value="fr">fr</option>
-                                                                    <option value="θr">θr</option>
-                                                            
-                                                                    <option value="ʃr">ʃr</option>
-                                                                
-                                                                    <option value="tʃr">tʃr</option>
-                                                                    <option value="dʒr">dʒr</option>
-                                                                    <option value="sn">sn</option>
-                                                                    <option value="sl">sl</option>
-                                                                    <option value="st">st</option>
-                                                                    <option value="sp">sp</option>
-                                                                    <option value="sm">sm</option>
-                                                                    <option value="st">st</option>
-                                                                    <!-- Three-element clusters -->
-                                                                    <option value="spr">spr</option>
-                                                                    <option value="str">str</option>
-                                                                    <option value="skr">skr</option>
-                                                                    <option value="skw">skw</option>
-                                                                    <option value="spl">spl</option>
-                                                                    <option value="skl">skl</option>
-                                                                    <option value="sʃr">sʃr</option>
+                                                                <select class="uk-select uk-form-width-xsmall" id="form-stacked-select" name="targetSound">                                                             
+                                                                    <optgroup label="Stops">
+                                                                        <option value="p">p</option>
+                                                                        <option value="b">b</option>
+                                                                        <option value="t">t</option>
+                                                                        <option value="d">d</option>
+                                                                        <option value="k">k</option>
+                                                                        <option value="g">g</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Fricatives">
+                                                                        <option value="f">f</option>
+                                                                        <option value="v">v</option>
+                                                                        <option value="θ">θ</option>
+                                                                        <option value="ð">ð</option>
+                                                                        <option value="s">s</option>
+                                                                        <option value="z">z</option>
+                                                                        <option value="ʃ">ʃ</option>
+                                                                        <option value="ʒ">ʒ</option>
+                                                                        <option value="h">h</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Affricates">
+                                                                        <option value="tʃ">tʃ</option>
+                                                                        <option value="dʒ">dʒ</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Nasals">
+                                                                        <option value="m">m</option>
+                                                                        <option value="n">n</option>
+                                                                        <option value="ŋ">ŋ</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Liquids">
+                                                                        <option value="l">l</option>
+                                                                        <option value="r">r</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Glides">
+                                                                        <option value="w">w</option>
+                                                                        <option value="j">j</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Two-element clusters">
+                                                                        <option value="pr">pr</option>
+                                                                        <option value="br">br</option>
+                                                                        <option value="kr">kr</option>
+                                                                        <option value="gr">gr</option>
+                                                                        <option value="fr">fr</option>
+                                                                        <option value="θr">θr</option>
+                                                                        <option value="ʃr">ʃr</option>
+                                                                        <option value="tʃr">tʃr</option>
+                                                                        <option value="dʒr">dʒr</option>
+                                                                        <option value="sn">sn</option>
+                                                                        <option value="sl">sl</option>
+                                                                        <option value="st">st</option>
+                                                                        <option value="sp">sp</option>
+                                                                        <option value="sm">sm</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Three-element clusters">
+                                                                        <option value="spr">spr</option>
+                                                                        <option value="str">str</option>
+                                                                        <option value="skr">skr</option>
+                                                                        <option value="skw">skw</option>
+                                                                        <option value="spl">spl</option>
+                                                                        <option value="skl">skl</option>
+                                                                        <option value="sʃr">sʃr</option>
+                                                                    </optgroup>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                     
                                                         <!-- Add word position-->
                                                         <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid uk-flex-center uk-width-auto@m">
-                                                            <label><input class="uk-radio" type="radio" name="wordPosition" checked>initial</label>
-                                                            <label><input class="uk-radio" type="radio" name="wordPosition">medial</label>
-                                                            <label><input class="uk-radio" type="radio" name="wordPosition">final</label>
+                                                            <label><input class="uk-radio" type="radio" name="wordPosition" value="word_nitial" checked>initial</label>
+                                                            <label><input class="uk-radio" type="radio" name="wordPosition" value="word_medial">medial</label>
+                                                            <label><input class="uk-radio" type="radio" name="wordPosition" value="word_final">final</label>
                                                         </div>
                                                     </div>
 
@@ -143,7 +155,8 @@
                                                         <input class="uk-range" type="range" name="maxSyllables" value="2" min="1" max="5" step="1" aria-label="Range" oninput="sliderFunction(this)" uk-tooltip="hello">
                                                     </div>
                                                    
-                                                    <!-- add 6 words -->
+                                                    
+                                                    <!-- add 6 words 
                                                     <div class="uk-grid-small uk-grid-column-small uk-grid-row-small" uk-grid>
                                                         <label class="uk-form-label" for="form-stacked-select"><span uk-icon="file-text" ></span> Words</label>
                                                         <div class="uk-grid uk-grid-column-small uk-grid-row-small">
@@ -172,12 +185,82 @@
                                                         </div>
                                                         
                                                         
-                                                    </div>
+                                                    </div> -->
                                                     <!-- Add phono/artic -->
                                                     <div class="uk-grid-small uk-child-width-auto uk-grid uk-flex-center">
-                                                        <label><input class="uk-radio" type="radio" name="phono" checked>artic</label>
-                                                        <label><input class="uk-radio" type="radio" name="phono">phono</label>
+                                                        <label><input class="uk-radio" type="radio" name="phono" checked value="single_sound_disorder">artic</label>
+                                                        <label><input class="uk-radio" type="radio" name="phono" value="phonological_disorder">phono</label>
                                                     </div>
+
+                                                    <!-- excluded sounds -->
+                                                        <div>
+                                                            <div>
+                                                                <label class="uk-form-label" for="form-stacked-text"><span uk-icon="ban"></span> Exclude</label>
+                                                                 <select class="uk-select uk-form-width-xsmall" id="form-stacked-select" name="targetSound">                                                             
+                                                                    <optgroup label="Stops">
+                                                                        <option value="p">p</option>
+                                                                        <option value="b">b</option>
+                                                                        <option value="t">t</option>
+                                                                        <option value="d">d</option>
+                                                                        <option value="k">k</option>
+                                                                        <option value="g">g</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Fricatives">
+                                                                        <option value="f">f</option>
+                                                                        <option value="v">v</option>
+                                                                        <option value="θ">θ</option>
+                                                                        <option value="ð">ð</option>
+                                                                        <option value="s">s</option>
+                                                                        <option value="z">z</option>
+                                                                        <option value="ʃ">ʃ</option>
+                                                                        <option value="ʒ">ʒ</option>
+                                                                        <option value="h">h</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Affricates">
+                                                                        <option value="tʃ">tʃ</option>
+                                                                        <option value="dʒ">dʒ</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Nasals">
+                                                                        <option value="m">m</option>
+                                                                        <option value="n">n</option>
+                                                                        <option value="ŋ">ŋ</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Liquids">
+                                                                        <option value="l">l</option>
+                                                                        <option value="r">r</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Glides">
+                                                                        <option value="w">w</option>
+                                                                        <option value="j">j</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Two-element clusters">
+                                                                        <option value="pr">pr</option>
+                                                                        <option value="br">br</option>
+                                                                        <option value="kr">kr</option>
+                                                                        <option value="gr">gr</option>
+                                                                        <option value="fr">fr</option>
+                                                                        <option value="θr">θr</option>
+                                                                        <option value="ʃr">ʃr</option>
+                                                                        <option value="tʃr">tʃr</option>
+                                                                        <option value="dʒr">dʒr</option>
+                                                                        <option value="sn">sn</option>
+                                                                        <option value="sl">sl</option>
+                                                                        <option value="st">st</option>
+                                                                        <option value="sp">sp</option>
+                                                                        <option value="sm">sm</option>
+                                                                    </optgroup>
+                                                                    <optgroup label="Three-element clusters">
+                                                                        <option value="spr">spr</option>
+                                                                        <option value="str">str</option>
+                                                                        <option value="skr">skr</option>
+                                                                        <option value="skw">skw</option>
+                                                                        <option value="spl">spl</option>
+                                                                        <option value="skl">skl</option>
+                                                                        <option value="sʃr">sʃr</option>
+                                                                    </optgroup>
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                     <!-- Submit-->
                                                     <button class="uk-button uk-margin uk-button-primary uk-flex-centertype="submit" type="submit">Submit</button>
                                                 </form>
@@ -195,22 +278,26 @@
                     <ul class="uk-navbar-nav">
                         
                         <li class="uk-active uk-text-light"><a href="" uk-icon="icon: sign-in" class="uk-icon-link">Sign-in</a></li>
-                        <div class="uk-width-large" uk-dropdown>
+                        <div class="uk-width-large" uk-dropdown="animation: slide-top; animate-out: true">
                             <form class="uk-form">
-                                <div class="uk-drop-grid uk-child-width-1-2@m" uk-grid>
-                                    
-                                    <div class="uk-form-password">
-                                        <label>User</label>
-                                        <input type="user">
-                                        <a href="" class="uk-form-password-toggle" data-uk-form-password></a>
+                                <div class="uk-drop-grid uk-grid-divider uk-child-width-1-2" uk-grid>
+                                    <div>
+                                        <div class="uk-inline">
+                                            <span class="uk-form-icon" uk-icon="icon: user"></span>
+                                            <input class="uk-input" type="text" aria-label="Not clickable icon">
+                                        </div>
                                     </div>
-                                    <div class="uk-form-password">
-                                        <label>password</label>
-                                        <input type="password">
-                                        <a href="" class="uk-form-password-toggle" data-uk-form-password></a>
+                                
+                                    <div>
+                                        <div class="uk-inline">
+                                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                                            <input class="uk-input" type="password" aria-label="Not clickable icon">
+                                        </div>
                                     </div>
-                                    <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">Button</button>
                                 </div>
+                                
+                                <button class="uk-button uk-button-primary uk-width-1-1 uk-margin uk-flex-center">Button</button>
+                                
                             </form>
                         </div>    
                     </ul>

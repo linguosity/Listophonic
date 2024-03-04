@@ -14,23 +14,141 @@ const newForm = (req,res) => {
 //CREATE | POST
 // manipulate data
 const create = async(req, res) => {
-        try{
-            console.log(req.body);
-            console.log(req.query);
-            const providers = await Provider.findById(req.query.provider_id);
 
-            const newStudent = await Student.create(req.body);
-            providers.students.push(newStudent);
+    let provider_id = req.query.provider_id;
+    let targetSound = req.body.targetSound;
+    let maxSyllables = req.body.maxSyllables;
+    let wordPosition = req.body.wordPosition;
+    let phono = req.body.phono;
 
-            await providers.save();
+    try{
+        console.log(req.body);
+        console.log(req.query);
+        const providers = await Provider.findById(provider_id);
 
-            res.redirect('/main');
-        }catch(err){
-            console.log(err)
-        }
+        const newStudent = await Student.create(req.body);
+        providers.students.push(newStudent);
+
         
+
+        await providers.save();
+
+       
+    }catch(err){
+        console.log(err)
+    }
     
-};
+    try{
+        //call OPENAI API
+        //const providers = await Provider.find();
+
+        const data = JSON.stringify({
+            model: "gpt-3.5-turbo-0125", // Update the model to the one you intend to use
+            response_format: { type: "json_object" },
+            messages: [
+                { role: "system", content: `
+                You are an expert linguist with tremendous semantic and grammatical knowledge. Given a list of strict parameters, 
+                you will create a list of 6 words for articulation practice. Take a deep breath and work through the solution step by step. I'll tip you $20 upon completion. 
+                
+                Return responses strictly in the following JSON format :
+
+                    {
+                        "realWords": {
+                            "type": "array",
+                            "description": "a list of 4 real words with ${targetSound} in ${wordPosition} position containing ${maxSyllables} syllables",
+                            "examples": [],
+                            },
+
+                            "nonsenseWords": {
+                            "type": "array",
+                            "description": "a list of 2 nonsense words with ${targetSound} in ${wordPosition} position containing ${maxSyllables} syllables",
+                            "examples": [],
+                            },
+
+                        "required": ["realWords", "nonsenseWords"]
+                        
+                    }
+
+                ` },
+                { role: "user", content: `
+                    "targetSound": "${targetSound}",
+                    "maxSyllables": ${maxSyllables},
+                    "wordPosition": "${wordPosition}",
+                    "disorder": "${phono}"
+                ` }
+                // Add more messages as needed
+            ]
+        });
+
+        const options = {
+            hostname: 'api.openai.com',
+            port: 443,
+            path: '/v1/chat/completions',
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${OPENAI_API_KEY}`,
+                'Content-Type': 'application/json',
+                'Content-Length': data.length
+            }
+        };
+
+        const apiRequest = https.request(options, apiResponse => {
+            let data = '';
+
+            apiResponse.on('data', chunk => {
+                data += chunk;
+            });
+
+            apiResponse.on('end', async () => {
+                //console.log("Raw data:", data);
+                let newData = JSON.parse(data);
+                newData = JSON.parse(newData.choices[0].message.content);
+                console.log(newData);
+                /*
+                console.log(newData.parameters.properties.sentences);
+                let phrases = newData.parameters.properties.phrases.examples;
+                let sentences = newData.parameters.properties.sentences.examples;
+                console.log("OpenAI api call:", phrases, sentences);*/
+
+                try{
+                    //save phrases and sentences in target Student schema & updated sub and parent schemas
+                    /*const provider = await Provider.findById(providerID);
+                    const student = provider.students.id(studentID);
+
+                    console.log("found provider:  ", provider);
+                    console.log("found student:  ", student);*/
+
+                    
+                    //await provider.save();
+                    //const updatedStudent = await Student.findByIdAndUpdate(studentID, {phrases: phrases, sentences: sentences}, {new:true});
+                    //console.log("updated student", updatedStudent);
+                    //updatedStudent.save();
+
+                    //save phrases and sentences 
+                    //res.render('index.ejs', {providers, phrases, sentences});
+                    //res.redirect('/');
+
+                }catch(err){
+                    console.log(err);
+                }
+
+                
+            });
+        });
+
+        apiRequest.on('error', error => {
+            res.status(500).send(error.toString());
+            console.log("there was en error here");
+        });
+
+        apiRequest.write(data);
+        apiRequest.end();
+
+    }catch(err){
+        console.log("the error is", err);
+    }
+}
+
 
 //INDEX | GET
 // render the home page with indexed students

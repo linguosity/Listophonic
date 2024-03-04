@@ -1,10 +1,11 @@
 <!-- Modals-->
-<div id="modal-<%= student._id%>" uk-modal>
+<div id="modal-<%= student._id%>" class="uk-border-rounded" uk-modal>
   <div class="uk-modal-dialog uk-border-rounded">
-    <button class="uk-modal-close-default" type="button" uk-close>
-    </button>
+    
     <div class="uk-modal-header">
-        <h2 class="uk-modal-title"><%= student.name %></h2>
+        <h2 class="uk-modal-title"><%= student.firstName + " " + student.lastName %></h2>
+        <button class="uk-modal-close-default" type="button" uk-close>
+        </button>
     </div>
 
     <form action="/main/openAI" method="GET" id="form<%=student._id%>">
