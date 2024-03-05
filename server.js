@@ -25,6 +25,9 @@ app.use(session({
     saveUninitialized: false, //don't save cookie w/o user's permission
 }))
 
+app.use('/sessions', sessionsController)
+app.use('/users', userController)
+
 ////////////
 
 //include routes files as middleware

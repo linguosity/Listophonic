@@ -143,7 +143,7 @@
                                                     
                                                         <!-- Add word position-->
                                                         <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid uk-flex-center uk-width-auto@m">
-                                                            <label><input class="uk-radio" type="radio" name="wordPosition" value="word_nitial" checked>initial</label>
+                                                            <label><input class="uk-radio" type="radio" name="wordPosition" value="word_initial" checked>initial</label>
                                                             <label><input class="uk-radio" type="radio" name="wordPosition" value="word_medial">medial</label>
                                                             <label><input class="uk-radio" type="radio" name="wordPosition" value="word_final">final</label>
                                                         </div>
@@ -196,7 +196,7 @@
                                                         <div>
                                                             <div>
                                                                 <label class="uk-form-label" for="form-stacked-text"><span uk-icon="ban"></span> Exclude</label>
-                                                                 <select class="uk-select uk-form-width-xsmall" id="form-stacked-select" name="targetSound">                                                             
+                                                                 <select class="uk-select uk-form-width-xsmall" id="form-stacked-select" name="excludedSound">                                                             
                                                                     <optgroup label="Stops">
                                                                         <option value="p">p</option>
                                                                         <option value="b">b</option>
@@ -274,34 +274,72 @@
                     </ul>
                 </div>
                 <span class="uk-navbar-item uk-logo" href="#"><img src="/assets/listophonic.png" width="40px"> Listophonic </span>
+                <% if (currentUser) { %>
+                    <!--if a user is signed in, populate slider with bio e.g. username etc-->
+                    <div class="uk-navbar-center-right">
+                        <ul class="uk-navbar-nav">
+                            <li class="uk-active uk-text-light"><a href="" uk-icon="icon: sign-in" class="uk-icon-link">Welcome</a></li>
+                            <div class="uk-width-large" uk-dropdown="animation: slide-top; animate-out: true">
+                                <span class="uk-navbar-item"> Welcome <%= currentUser.username %></li>
+                                
+                                    <form action="/sessions?_method=DELETE" method="POST">
+                                      <input type="submit" value="Log Out" />
+                                      <!--redirect to destroy route for sessions-->
+                                    </form>
+                            </div>  
+                            
+                        </ul>
+                    </div>
+                            
+                         
+                    
+                    <% } else { %>
+                    <!--    <li><a class="nav-link" href="/users/new">Sign Up</a></li>
+                    <li><a class="nav-link" href="/sessions/new">Log In</a></li>    -->
                 <div class="uk-navbar-center-right">
                     <ul class="uk-navbar-nav">
-                        
                         <li class="uk-active uk-text-light"><a href="" uk-icon="icon: sign-in" class="uk-icon-link">Sign-in</a></li>
                         <div class="uk-width-large" uk-dropdown="animation: slide-top; animate-out: true">
-                            <form class="uk-form">
+                            <form class="uk-form" action="/sessions" method="POST">
                                 <div class="uk-drop-grid uk-grid-divider uk-child-width-1-2" uk-grid>
                                     <div>
                                         <div class="uk-inline">
                                             <span class="uk-form-icon" uk-icon="icon: user"></span>
-                                            <input class="uk-input" type="text" aria-label="Not clickable icon">
+                                            <input class="uk-input" type="text" aria-label="Not clickable icon" required type="text" name="username">
                                         </div>
                                     </div>
                                 
                                     <div>
                                         <div class="uk-inline">
                                             <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                                            <input class="uk-input" type="password" aria-label="Not clickable icon">
+                                            <input class="uk-input" type="password" aria-label="Not clickable icon" name="password">
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <!-- this button should go to the route function that logs in and redirect back to index, 
+                                            <form action="/sessions" method="POST">
+                                            Username: <input required type="text" name="username"/><br>
+                                            Password: <input required type="text" name="password"><br>
+                                            <input type="submit" name="" value="Login"/> -->
                                 <button class="uk-button uk-button-primary uk-width-1-1 uk-margin uk-flex-center">Button</button>
                                 
                             </form>
-                        </div>    
+                            <a href="#signup" class="uk-icon-link uk-align-right uk-text-primary" uk-icon="user" uk-toggle><span uk-icon="icon: plus"> sign up </span></a>
+                            <div id="signup" uk-offcanvas="flip: true">
+                                <div class="uk-offcanvas-bar">
+                                    <h1>Sign Up</h1>
+                                        <form action="/users" method="POST">
+                                            Username: <input required type="text" name="username"/><br>
+                                            Password: <input required type="text" name="password"><br>
+                                            <input type="submit" name="" value="Sign Up"/>
+                                        </form>
+                                </div>
+                            </div>
+                        </div>  
+                        
                     </ul>
                 </div>
+                <% } %>
             </div>
         </div>
     </div>

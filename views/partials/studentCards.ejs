@@ -36,8 +36,45 @@
                         </form>
                     </ul>
                 </div> 
-               
-                <a href="#offcanvas-edit" uk-toggle class="uk-icon-link" uk-icon="icon: file-edit"></a>
+                <div class="uk-inline">
+                    <button class="uk-button uk-button-text" type="button"><span uk-icon="icon: info"></span></button>
+                    <div class="uk-width-small" uk-dropdown="pos: right-top; target: !.uk-card-small; animation: slide-left; animate-out: true; duration: 400;mode: click">
+                        <table class="uk-table uk-table-divider">
+                            <thead>
+                                <tr>
+                                    <th class="uk-h5"><span uk-icon="icon: user"></span></th>                                  
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="uk-text-small"><span uk-icon="icon: calendar"></span> <%= student.age %> years old</td>
+                                </tr>
+                                <tr>
+                                    <td class="uk-text-small"><span uk-icon="icon: bookmark"></span> <%= student.grade %> grade</td>
+                                </tr>
+                                <tr>
+                                    <td class="uk-text-small"><span uk-icon="icon: crosshairs"></span>
+                                        <% if (student.wordPosition === 'word_initial') { %>
+                                            / <%= student.targetSound %>_ /
+                                        <% } else if (student.wordPosition === 'word_medial') { %>
+                                            / _<%= student.targetSound %>_ /
+                                        <% } else if (student.wordPosition === 'word_final') { %>
+                                            / _<%= student.targetSound %> / 
+                                        <% } %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="uk-text-small"><span uk-icon="icon: ban"></span> <%= student.excludedSound %></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="uk-text-small"><span uk-icon="icon: cog"></span><%= student.phono %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <a href="#offcanvas<%=student._id%>" uk-toggle class="uk-icon-link" uk-icon="icon: file-edit"></a>
                 <%- include ("offCanvasEdit", {provider: providers, student: student, wordList}) %>
             </div>
         </div>

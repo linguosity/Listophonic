@@ -13,7 +13,7 @@ const studentSchema = new mongoose.Schema({
     phrases: [String],
     sentences: [String],
     wordPosition: {type: String, required: true},
-    excludedSounds: [Array],
+    excludedSounds: {type: [String], required: true}
 
 }, {timestamps: true});
 
