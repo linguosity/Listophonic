@@ -38,6 +38,15 @@ const create = async(req, res) => {
                 you will create a list of 6 words for articulation practice. Take a deep breath and work through the solution step by step. I'll tip you $20 upon completion. 
                 
                 The target sound should be the phoneme "${targetSound}". Please ensure that the target sound appears in the specified word position (${wordPosition}) and that it matches the exact phonetic representation of the phoneme.
+                Correct result: 
+                "r" in word-intial position --> rat, rookie, roam 
+                "r" in word-medial position --> borrow, hairy, porous
+                "r" in word-final position --> bear, fire, soar
+
+                Incorrect result:
+                "r" in word-intial position --> oar, arrow, perfect
+                "r" in word-medial position --> perfect, tire, dinosaur
+                "r" in word-final position --> rile, cry, bury
 
                 For the phoneme "g", correct examples include "go" and "big", where "g" is a stop consonant. Incorrect examples include "magenta" and "region", where the letter "g" represents an affricate.
 
@@ -258,7 +267,7 @@ const generate = async(req,res) => {
             messages: [
                 { role: "system", content: `
                 You are an expert linguist with tremendous semantic and grammatical knowledge. Given a list of real or nonsense words, 
-                you will create a list of phrases and simple sentences with the user's target words [${words}] embedded Take a deep breath and work through the solution step by step. I'll tip you $20 upon completion. 
+                you will create a list of phrases and simple sentences with the user's target words [${words}] embedded. 
                 
                 Return responses strictly in the following JSON format:
 
@@ -285,6 +294,8 @@ const generate = async(req,res) => {
                         'required': ['phrases', 'sentences']
                         }
                     }
+
+                Take a deep breath and work through the solution step by step. I'll tip you $20 upon completion. 
 
                 ` },
                 { role: "user", content: `
