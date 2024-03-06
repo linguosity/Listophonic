@@ -13,16 +13,18 @@ const studentSchema = new mongoose.Schema({
     phrases: [String],
     sentences: [String],
     wordPosition: {type: String, required: true},
-    excludedSounds: {type: [String], required: true}
+    excludedSounds: {type: [String], required: true}, 
 
 }, {timestamps: true});
 
 const providerSchema = new mongoose.Schema({
-    firstName: {type: String, required: true},
-    lastName: {type: String, required: true},
-    email: {type: String, required: true},
+    firstName: String,
+    lastName: String,
+    email: String,
     //embedded student schema
-    students: [studentSchema]
+    students: [studentSchema],
+    username: {type: String, unique: true, required: true},
+    password: {type: String, required: true}
 }, {timestamps: true});
 
 const Student = mongoose.model("Student", studentSchema);

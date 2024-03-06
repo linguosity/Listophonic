@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const router = require('express').Router()
-const User = require('../models/User.js')
+const { Provider } = require('../models/Provider.js')
 
 /*router.get('/new', (req, res) => {
     res.render('sessions/new.ejs', { 
@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
 
   // Step 1 Look for the username
   try {
-    const foundUser = await User.findOne({ username: req.body.username })
+    const foundUser = await Provider.findOne({ username: req.body.username })
     if (!foundUser) {
         // if found user is undefined/null not found etc
         res.send('<a  href="/">Sorry, no user found </a>')
@@ -48,6 +48,7 @@ router.post('/', async (req, res) => {
 
 router.delete('/', (req, res) => {
   req.session.destroy(() => {
+    console.log("delete");
     res.redirect('/')
   })
 })

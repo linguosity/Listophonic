@@ -2,7 +2,7 @@
     <div class="uk-offcanvas-bar">
 
         <!-- Create new student form & pass provider id in URL-->
-        <form action="/main/?_method=PUT&provider_id=<%= providers[0]._id%>" method="POST" class="uk-form-stacked">
+        <form action="/main/?_method=PUT&provider_id=<%= providers._id%>" method="POST" class="uk-form-stacked">
             <% let gradeArray = ['prek', 'tk', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th']; %>
             <% let soundArray = [ "p", "b", "t", "d", "k", "g", "f", "v", "θ", "ð", "s", "z", "ʃ", "ʒ", "h", "tʃ", "dʒ", "m", "n", "ŋ", "l", "r", "w", "j",
             "pr", "br", "kr", "gr", "fr", "θr", "ʃr", "tʃr", "dʒr", "sn", "sl", "st", "sp", "sm", "spr", "str", "skr", "skw", "spl", "skl", "sʃr"

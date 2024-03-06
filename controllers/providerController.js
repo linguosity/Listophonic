@@ -1,6 +1,8 @@
 
 const Provider = require("../models/Provider").Provider
 const Student = require("../models/Provider").Student
+const bcrypt = require('bcrypt')
+const router = require('express').Router()
 const https = require("https");
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
@@ -16,6 +18,7 @@ const newForm = (req,res) => {
 const create = async(req, res) => {
 
     let provider_id = req.query.provider_id;
+    console.log(provider_id);
     let targetSound = encodeURIComponent(req.body.targetSound);
     let maxSyllables = req.body.maxSyllables;
     let wordPosition = req.body.wordPosition;
@@ -109,8 +112,7 @@ const create = async(req, res) => {
                 nonsenseWords = newData.nonsenseWords.examples;
 
                 try{
-                    console.log(req.body);
-                    console.log(req.query);
+                    
                     const providers = await Provider.findById(provider_id);
 
                     const newStudent = await Student.create(req.body);
@@ -152,11 +154,19 @@ const create = async(req, res) => {
 // render the home page with indexed students
 const index = async(req,res) => {
     try{
-        const providers = await Provider.find();
+        //console.log("session_id", req.session);
+        let provider;
+        if (req.session.currentUser) {
+            provider = await Provider.findById(req.session.currentUser._id);
+        }
         
+        //const providers = await Provider.find();
+        //console.log("id is: ", req);
+        //console.log("provider by id", providers);
+        //const providers = await Provider.find();
+
         res.render('index.ejs', {
-            providers,
-            currentUser: req.session.currentUser,
+            providers: provider 
         });
     }
     catch(err) {
@@ -358,7 +368,7 @@ const generate = async(req,res) => {
 const destroy = async(req,res) => {
     try{
         //receive providerID and studentID
-        console.log(req.body);
+        
         let providerID = req.body.provider_id;
         let studentID = req.body.student_id;
 

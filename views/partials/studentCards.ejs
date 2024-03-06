@@ -1,88 +1,91 @@
 <main class="uk-grid-medium uk-margin-medium-top" style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: center;">
-    <% providers[0].students.forEach(student => { %>
-        <!-- Card -->
-        <div class="uk-card-small uk-padding-small uk-border-rounded uk-box-shadow-small uk-box-shadow-hover-large uk-margin-medium-right" style="width: 12em;">
-            <div class="uk-card-header uk-flex-between" style="display: flex; flex-direction: row;">
-                <h3 class="uk-card-title uk-text-center uk-text-default"><%= `${student.firstName} ${student.lastName}`  %></h3>
-                <a href="#modal-<%= student._id%>" uk-toggle class="uk-icon-link" uk-icon="icon: push">
-                </a>
-            </div>
-            <div class="uk-card-body">
-                <ul class="uk-list uk-list-divider">
-                    <% let wordList = student.realWords.concat(student.nonsenseWords); %>
-                    <% wordList.forEach(word => { %>
-        
-                        <li><%= word %></li>
-        
-                    <% }) %>
-                        
-                </ul>
-            </div>
-            <div class="uk-card-footer uk-flex uk-flex-between">
-                <button class="uk-button uk-button-text uk-button-small" type="button"><a href="" class="uk-icon-link" uk-icon="icon: trash"></a></button>
-                <div uk-dropdown="mode: click">
-                    <ul class="uk-list uk-list-muted uk-list-collapse">
-                        <form action="/main/?_method=DELETE" method="POST">
-                            <li class="uk-text-danger">
-                                <div uk-form-custom>
-                                    <input type="hidden" value="<%= providers[0]._id %>" name="provider_id">
-                                    <input type="hidden" value="<%= student._id%>" name="student_id">
-                                    <button class="uk-button uk-button-text uk-text-danger" type="submit" tabindex="-1">
-                                        DELETE
-                                    </button>
-                                </div>
-                            </li>
-                        <li class="uk-text-muted uk-text-small"><a href="#">CANCEL</a></li>
-                        </form>
-                    </ul>
-                </div> 
-                <div class="uk-inline">
-                    <button class="uk-button uk-button-text" type="button"><span uk-icon="icon: info"></span></button>
-                    <div class="uk-width-small" uk-dropdown="pos: right-top; target: !.uk-card-small; animation: slide-left; animate-out: true; duration: 400;mode: click">
-                        <table class="uk-table uk-table-divider">
-                            <thead>
-                                <tr>
-                                    <th class="uk-h5"><span uk-icon="icon: user"></span></th>                                  
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="uk-text-small"><span uk-icon="icon: calendar"></span> <%= student.age %> years old</td>
-                                </tr>
-                                <tr>
-                                    <td class="uk-text-small"><span uk-icon="icon: bookmark"></span> <%= student.grade %> grade</td>
-                                </tr>
-                                <tr>
-                                    <td class="uk-text-small"><span uk-icon="icon: crosshairs"></span>
-                                        <% if (student.wordPosition === 'word_initial') { %>
-                                            / <%= student.targetSound %>_ /
-                                        <% } else if (student.wordPosition === 'word_medial') { %>
-                                            / _<%= student.targetSound %>_ /
-                                        <% } else if (student.wordPosition === 'word_final') { %>
-                                            / _<%= student.targetSound %> / 
-                                        <% } %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="uk-text-small"><span uk-icon="icon: ban"></span> <%= student.excludedSound %></td>
-                                </tr>
-                                
-                                <tr>
-                                    <td class="uk-text-small"><span uk-icon="icon: cog"></span><%= student.phono %></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+    <% console.log(providers); %>
+    <% if(providers){ %>
+        <% providers.students.forEach(student => { %>
+            <!-- Card -->
+            <div class="uk-card-small uk-padding-small uk-border-rounded uk-box-shadow-small uk-box-shadow-hover-large uk-margin-medium-right" style="width: 12em;">
+                <div class="uk-card-header uk-flex-between" style="display: flex; flex-direction: row;">
+                    <h3 class="uk-card-title uk-text-center uk-text-default"><%= `${student.firstName} ${student.lastName}`  %></h3>
+                    <a href="#modal-<%= student._id%>" uk-toggle class="uk-icon-link" uk-icon="icon: push">
+                    </a>
                 </div>
-                <a href="#offcanvas<%=student._id%>" uk-toggle class="uk-icon-link" uk-icon="icon: file-edit"></a>
-                <%- include ("offCanvasEdit", {provider: providers, student: student, wordList}) %>
+                <div class="uk-card-body">
+                    <ul class="uk-list uk-list-divider">
+                        <% let wordList = student.realWords.concat(student.nonsenseWords); %>
+                        <% wordList.forEach(word => { %>
+            
+                            <li><%= word %></li>
+            
+                        <% }) %>
+                            
+                    </ul>
+                </div>
+                <div class="uk-card-footer uk-flex uk-flex-between">
+                    <button class="uk-button uk-button-text uk-button-small" type="button"><a href="" class="uk-icon-link" uk-icon="icon: trash"></a></button>
+                    <div uk-dropdown="mode: click">
+                        <ul class="uk-list uk-list-muted uk-list-collapse">
+                            <form action="/main/?_method=DELETE" method="POST">
+                                <li class="uk-text-danger">
+                                    <div uk-form-custom>
+                                        <input type="hidden" value="<%= providers._id %>" name="provider_id">
+                                        <input type="hidden" value="<%= student._id%>" name="student_id">
+                                        <button class="uk-button uk-button-text uk-text-danger" type="submit" tabindex="-1">
+                                            DELETE
+                                        </button>
+                                    </div>
+                                </li>
+                            <li class="uk-text-muted uk-text-small"><a href="#">CANCEL</a></li>
+                            </form>
+                        </ul>
+                    </div> 
+                    <div class="uk-inline">
+                        <button class="uk-button uk-button-text" type="button"><span uk-icon="icon: info"></span></button>
+                        <div class="uk-width-small" uk-dropdown="pos: right-top; target: !.uk-card-small; animation: slide-left; animate-out: true; duration: 400;mode: click">
+                            <table class="uk-table uk-table-divider">
+                                <thead>
+                                    <tr>
+                                        <th class="uk-h5"><span uk-icon="icon: user"></span></th>                                  
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="uk-text-small"><span uk-icon="icon: calendar"></span> <%= student.age %> years old</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uk-text-small"><span uk-icon="icon: bookmark"></span> <%= student.grade %> grade</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uk-text-small"><span uk-icon="icon: crosshairs"></span>
+                                            <% if (student.wordPosition === 'word_initial') { %>
+                                                / <%= student.targetSound %>_ /
+                                            <% } else if (student.wordPosition === 'word_medial') { %>
+                                                / _<%= student.targetSound %>_ /
+                                            <% } else if (student.wordPosition === 'word_final') { %>
+                                                / _<%= student.targetSound %> / 
+                                            <% } %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="uk-text-small"><span uk-icon="icon: ban"></span> <%= student.excludedSound %></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td class="uk-text-small"><span uk-icon="icon: cog"></span><%= student.phono %></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <a href="#offcanvas<%=student._id%>" uk-toggle class="uk-icon-link" uk-icon="icon: file-edit"></a>
+                    <%- include ("offCanvasEdit", {provider: providers, student: student, wordList}) %>
+                </div>
             </div>
-        </div>
 
-        
-        <%- include ("viewStudentModal", {student: student, wordList: wordList, phrases: student.phrases, sentences: student.sentences}) %>
-        
-    <% }) %>
+            
+            <%- include ("viewStudentModal", {student: student, wordList: wordList, phrases: student.phrases, sentences: student.sentences}) %>
+            
+        <% }) %>
+    <% } %>
 </main>
 
 
