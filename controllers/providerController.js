@@ -314,37 +314,29 @@ const generate = async(req,res) => {
             });
 
             apiResponse.on('end', async () => {
-                //console.log("Raw data:", data);
+                
                 let newData = JSON.parse(data);
                 newData = JSON.parse(newData.choices[0].message.content);
 
-                //
-                console.log(newData.parameters.properties.sentences);
                 let phrases = newData.parameters.properties.phrases.examples;
                 let sentences = newData.parameters.properties.sentences.examples;
-                console.log("OpenAI api call:", phrases, sentences);
+                
 
                 try{
                     //save phrases and sentences in target Student schema & updated sub and parent schemas
                     const provider = await Provider.findById(providerID);
                     const student = provider.students.id(studentID);
 
-                    console.log("found provider:  ", provider);
-                    console.log("found student:  ", student);
-
                     student.phrases=phrases;
                     student.sentences=sentences;
                     await provider.save();
-                    //const updatedStudent = await Student.findByIdAndUpdate(studentID, {phrases: phrases, sentences: sentences}, {new:true});
-                    //console.log("updated student", updatedStudent);
-                    //updatedStudent.save();
-
-                    //save phrases and sentences 
-                    //res.render('index.ejs', {providers, phrases, sentences});
+                    
                     res.redirect('/');
+                    return;
 
                 }catch(err){
                     console.log(err);
+                    return;
                 }
 
                 
