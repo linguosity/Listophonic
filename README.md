@@ -7,12 +7,12 @@ Empower your speech therapy journey with Listophonic - where organization meets 
 
 # Screenshots
 
-<img src="https://imgur.com/K5gQkO5">
-<img src="https://imgur.com/eWh2F34">
-<img src="https://imgur.com/SGOvvCN">
-<img src="https://imgur.com/4s2AD5I">
-<img src="https://imgur.com/DeCExHg">
-<img src="https://imgur.com/82yNJLn">
+<img width="1262" alt="Screenshot 2024-03-06 at 5 54 25 PM" src="https://github.com/linguosity/Listophonic/assets/130627705/50cd08f1-cc39-4e96-8664-f9c2111b5c54">
+<img width="1256" alt="Screenshot 2024-03-06 at 5 54 59 PM" src="https://github.com/linguosity/Listophonic/assets/130627705/24c8ee19-7d04-40fa-ae93-e3c54edc3cf8">
+<img width="1264" alt="Screenshot 2024-03-06 at 5 55 36 PM" src="https://github.com/linguosity/Listophonic/assets/130627705/a8911347-e144-43ac-8633-4b308d31910e">
+<img width="1264" alt="Screenshot 2024-03-06 at 5 55 43 PM" src="https://github.com/linguosity/Listophonic/assets/130627705/f132be13-284f-43fb-bd7e-23d219bdfc02">
+<img width="1263" alt="Screenshot 2024-03-06 at 5 55 52 PM" src="https://github.com/linguosity/Listophonic/assets/130627705/a0cee246-6775-4fea-ad82-27010f4fa043">
+<img width="1264" alt="Screenshot 2024-03-06 at 5 56 05 PM" src="https://github.com/linguosity/Listophonic/assets/130627705/d968f5cc-841d-4cc3-8f36-44b364b2a90f">
 
 # Technologies Used
 
