@@ -25,6 +25,7 @@ Empower your speech therapy journey with Listophonic - where organization meets 
 - Express JS
 - Heroku
 - UIkit
+- OpenAI API
 
 # Getting Started
 
