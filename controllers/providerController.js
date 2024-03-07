@@ -29,6 +29,7 @@ const create = async(req, res) => {
         //call OPENAI API
         //const providers = await Provider.find();
 
+        //the API call coding was obtained via OpenAI's official documentation as well as ChatGPT with original prompting 
         const data = JSON.stringify({
             model: "gpt-3.5-turbo-0125", // Update the model to the one you intend to use
             response_format: { type: "json_object" },
@@ -89,7 +90,7 @@ const create = async(req, res) => {
                     "wordPosition": "${wordPosition}",
                     "disorder": "${phono}"
                 ` }
-                // Add more messages as needed
+                
             ]
         });
 

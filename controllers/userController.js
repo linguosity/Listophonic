@@ -1,11 +1,8 @@
 const router = require("express").Router()
 const bcrypt = require("bcrypt")
+// troubleshooting with below model import by ChatGPT
 const { Provider } = require("../models/Provider");
 
-
-/*router.get('/new', (req, res) => {
-  res.render('users/new.ejs') //we will make this in another step but good to get the route down
-})*/
 
 router.post('/', async (req, res) => {
 
@@ -14,14 +11,7 @@ router.post('/', async (req, res) => {
         req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
         const newUser = await Provider.create(req.body);
         req.session.currentUser = newUser;
-        /*req.session.save((err) => {
-            if (err) {
-                console.log(err);
-            } else {
-                return res.redirect('/');
-            }
-        });
-        //console.log(newUser);*/
+        
         res.render('index.ejs', {
             providers: req.session.currentUser,
         })
