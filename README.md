@@ -26,6 +26,9 @@ Empower your speech therapy journey with Listophonic - where organization meets 
 - Heroku
 - UIkit
 - OpenAI API
+- MongoDB
+- Node JS
+- BCrypt
 
 # Getting Started
 
