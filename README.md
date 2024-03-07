@@ -1,6 +1,6 @@
 # Listophonic 
 
-![listophonic](https://github.com/linguosity/Listophonic/assets/130627705/74e70e35-0a41-4723-a90c-3b19b8c650ad)
+![listophonic copy](https://github.com/linguosity/Listophonic/assets/130627705/59a77129-817e-4165-adf5-378db3a74776)
 
 Listophonic is a dynamic app designed to revolutionize the way speech therapists, clients, and families manage and organize vocabulary for multiple students. With a focus on convenience and effectiveness, this innovative tool allows users to effortlessly generate optimal word lists tailored to target sounds, along with corresponding phrases and sentences for evidence-based practice.
 
