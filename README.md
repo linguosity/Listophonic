@@ -1,59 +1,47 @@
-| APP |
-Listophonic
+# Listophonic 
 
-| PROJECT DESCRIPTION |
-A web-based app for speech therapists designed 
+![listophonic copy](https://github.com/linguosity/Listophonic/assets/130627705/59a77129-817e-4165-adf5-378db3a74776)
 
-| REPO LINK |
-https://github.com/linguosity/Listophonic
+Listophonic is a dynamic app designed to revolutionize the way speech therapists, clients, and families manage and organize vocabulary for multiple students. With a focus on convenience and effectiveness, this innovative tool allows users to effortlessly generate optimal word lists tailored to target sounds, along with corresponding phrases and sentences for evidence-based practice.
 
-| TRELLO LINK |
-https://trello.com/b/hpuLBQdX/listophonic-ga-project-2
+The app's unique approach ensures that target words are not only high-frequency but also carefully selected based on phonological density, catering to the specific needs of each student's etiology. Whether you're a therapist looking to streamline your sessions or a family member aiming to support your loved one's progress, Listophonic offers a user-friendly platform where you can log in, create new student profiles, and curate personalized vocab "decks" with ease.
 
-| WIRE FRAMES |
+Empower your speech therapy journey with Listophonic - where organization meets innovation for impactful learning and communication.
 
-Sign-in
-![Home screen _ Sign in](https://github.com/linguosity/Listophonic/assets/130627705/786517a7-7fd9-4157-9766-6306fdcc5c0a)
+# Screenshots
 
-Home/Index
-![Home screen _ Index (1)](https://github.com/linguosity/Listophonic/assets/130627705/90793a9e-f9c2-4771-9a26-477ad89a7028)
+<img width="1262" alt="Screenshot 2024-03-06 at 5 54 25 PM" src="https://github.com/linguosity/Listophonic/assets/130627705/50cd08f1-cc39-4e96-8664-f9c2111b5c54">
+<img width="1256" alt="Screenshot 2024-03-06 at 5 54 59 PM" src="https://github.com/linguosity/Listophonic/assets/130627705/24c8ee19-7d04-40fa-ae93-e3c54edc3cf8">
+<img width="1264" alt="Screenshot 2024-03-06 at 5 55 36 PM" src="https://github.com/linguosity/Listophonic/assets/130627705/a8911347-e144-43ac-8633-4b308d31910e">
+<img width="1264" alt="Screenshot 2024-03-06 at 5 55 43 PM" src="https://github.com/linguosity/Listophonic/assets/130627705/f132be13-284f-43fb-bd7e-23d219bdfc02">
+<img width="1263" alt="Screenshot 2024-03-06 at 5 55 52 PM" src="https://github.com/linguosity/Listophonic/assets/130627705/a0cee246-6775-4fea-ad82-27010f4fa043">
+<img width="1264" alt="Screenshot 2024-03-06 at 5 56 05 PM" src="https://github.com/linguosity/Listophonic/assets/130627705/d968f5cc-841d-4cc3-8f36-44b364b2a90f">
 
-New Student
-![Home screen _ New Student (1)](https://github.com/linguosity/Listophonic/assets/130627705/c90b62f0-1a3b-40e0-ad39-ff3e967fdab7)
+# Technologies Used
 
-View Student
-![Home screen _ View Student (2)](https://github.com/linguosity/Listophonic/assets/130627705/a6b2b874-4c1d-490f-b633-0b2c6c7d3bfd)
+- JavaScript
+- HTML
+- CSS
+- Express JS
+- Heroku
+- UIkit
+- OpenAI API
 
-Edit Student
-![Home screen _ Edit Student](https://github.com/linguosity/Listophonic/assets/130627705/e7a7fc88-66a3-456f-b213-e9f1bdfc4fde)
+# Getting Started
 
-User Edit
-![Home screen _ User Profile (1)](https://github.com/linguosity/Listophonic/assets/130627705/a49cdd6e-8571-4df2-8e3c-ecb086af5096)
+Click to view latest version of app:
 
+<a href="https://listophonic-b6d534527682.herokuapp.com/main" > Listophonic</a>
 
-| ERD |
-![Blank diagram (1)](https://github.com/linguosity/Listophonic/assets/130627705/9b3548f2-a082-43f7-964d-198df9efa1ea)
+# Testimonials
 
+"This app is a must for school-based SLPs!! I love that it can create a quick target sound specific word list for me and exclude certain other sounds that are difficult for my student. This will save me loads of time finding specific words for students in a group. The sounds are even grouped type! I can’t wait to use this for 5 min Artic & group sessions with my students!!"
+- Carlene Fort, Speech Therapist, Palmdale School District
 
-| USER STORIES |
-As a parent or educator working with students who have articulation needs, I want to quickly create and reference treatment targets individualized for each student on my caseload in order to reduce my workload and provide evidence-based practice.
+# Next Steps
 
-| MVP GOALS |
-- User login/logout
-- create student profiles
-- generate a word list between 5-10 words based on the following parameters: target sound, word context (e.g. beginning, middle, end)
-- generate word targets given user set parameters using ChatGPT 3.5 API with function calls
-- edit student profile (including word list)
-- Routes all protected by authorization - user must be logged in to see
-- edit user profile
-
-| Stretch Goals |
-- allow user to share word lists
-- allow user to print word lists
-- allow user to track student progress
-- allow user to select between real & nonsense words
-- allow user to group students
-- allow user to create multiple target sounds for each student
-- generate word targets embedded in phrases & sentences and/or short story given user set parameters using ChatGPT 3.5 API with function calls
-- provide optional phonotactic constraints (e.g. 1-, 2- or 3-syllable words), optional thematic constraints (e.g. Halloween vocabulary) to target words
-  
+- share word lists via email or text message
+- print word lists
+- choose real & nonsense words
+- organize students by group
+- create multiple word lists and/or targets for the same student
