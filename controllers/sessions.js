@@ -2,11 +2,6 @@ const bcrypt = require('bcrypt')
 const router = require('express').Router()
 const { Provider } = require('../models/Provider.js')
 
-/*router.get('/new', (req, res) => {
-    res.render('sessions/new.ejs', { 
-        currentUser: req.session.currentUser 
-    })
-})*/
 
 // on sessions form submit (log in)
 router.post('/', async (req, res) => {

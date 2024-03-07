@@ -403,6 +403,7 @@ const update =  async (req, res)=>{
         let foundStudent = provider.students.id(studentID);
 
         //update entire student
+        //consulted ChatGPT (OpenAI) for function method Object.assign
         Object.assign(foundStudent, req.body);
         await provider.save();
 

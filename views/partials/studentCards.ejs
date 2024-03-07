@@ -13,9 +13,13 @@
                     <ul class="uk-list uk-list-divider">
                         <% let wordList = student.realWords.concat(student.nonsenseWords); %>
                         <% wordList.forEach(word => { %>
-            
-                            <li><%= word %></li>
-            
+                            <%if(word != ''){ %>
+                            <li>
+                                
+                                <%= word %>
+                            
+                            </li>
+                            <% } %>
                         <% }) %>
                             
                     </ul>
