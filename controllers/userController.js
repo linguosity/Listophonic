@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const bcrypt = require("bcrypt")
-// troubleshooting with below model import by ChatGPT
+// Corrected imports using object destructuring based on ChatGPT recommendations [Line 4]
 const { Provider } = require("../models/Provider");
 
 

@@ -1,4 +1,3 @@
-
 const Provider = require("../models/Provider").Provider
 const Student = require("../models/Provider").Student
 const bcrypt = require('bcrypt')
@@ -6,12 +5,6 @@ const router = require('express').Router()
 const https = require("https");
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-
-//NEW | GET
-// render a new form
-const newForm = (req,res) => {
-
-};
 
 //CREATE | POST
 // manipulate data
@@ -27,9 +20,9 @@ const create = async(req, res) => {
     
     try{
         //call OPENAI API
+        //source: https://platform.openai.com/docs/api-reference
         //const providers = await Provider.find();
 
-        //the API call coding was obtained via OpenAI's official documentation as well as ChatGPT with original prompting 
         const data = JSON.stringify({
             model: "gpt-3.5-turbo-0125", // Update the model to the one you intend to use
             response_format: { type: "json_object" },
@@ -184,7 +177,6 @@ const index = async(req,res) => {
     }
 }
 
-//SHOW
 
 // SEED | GET
 // send seed data for display & deletion confirming database access
@@ -242,11 +234,9 @@ const seed = async (req, res) => {
 const generate = async(req,res) => {
     
     //save wordlist key value pairs from URL as local array 'words'
-    console.log("sent from app", req.query);
     let words=req.query.words;
 
     //save studentDI key value pair as local studentID
-    console.log("studentID", req.query.student_ID);
     let studentID = req.query.student_ID;
     let providerID = req.query.provider_ID;
 
@@ -262,6 +252,9 @@ const generate = async(req,res) => {
         //call OPENAI API
         const providers = await Provider.find();
 
+        
+        //call OpenAI's ChatGPT 3.5 api
+        //Source: https://platform.openai.com/docs/api-reference
         const data = JSON.stringify({
             model: "gpt-3.5-turbo-0125", // Update the model to the one you intend to use
             response_format: { type: "json_object" },
@@ -344,6 +337,8 @@ const generate = async(req,res) => {
                     await provider.save();
                     
                     res.redirect('/');
+                    // Lines 347 & 352 were revised to improve response handling in order to prevent 'ERR_HTTP_HEADERS_SENT' error
+                    //Source: ChatGPT
                     return;
 
                 }catch(err){
@@ -379,6 +374,7 @@ const destroy = async(req,res) => {
         const provider = await Provider.findById(providerID);
         const student = provider.students.id(studentID);
         
+        //// Removing a student subdocument from a provider's students array as suggested by ChatGPT [line 382]
         await Provider.updateOne(
             { _id: providerID }, // Match the provider document
             { $pull: { students: { _id: studentID } } } // Remove the student from the students array
@@ -394,8 +390,6 @@ const destroy = async(req,res) => {
 const update =  async (req, res)=>{
     try{
         //set value for id's providerID and studentID
-        console.log("body: ", req.body);
-        console.log("query: ", req.query);
         let providerID = req.query.provider_id;
         let studentID = req.body.student_id;
 
@@ -404,7 +398,8 @@ const update =  async (req, res)=>{
         let foundStudent = provider.students.id(studentID);
 
         //update entire student
-        //consulted ChatGPT (OpenAI) for function method Object.assign
+        // Update student subdocument using Object.assign() for object merging [405]
+        // Source: ChatGPT
         Object.assign(foundStudent, req.body);
         await provider.save();
 
@@ -420,18 +415,13 @@ const update =  async (req, res)=>{
     }
 }
 
-
-
-
 // export route variables for access within external files
 module.exports = {
     create,
     new: newForm,
     index,
-    //show,
     seed, 
     generate,
     destroy,
-    //edit: editForm,
     update
 }

@@ -12,7 +12,8 @@
                                 <span class="uk-navbar-item"> Welcome <%= providers.username %></li>
                                 
                                     <form action="/sessions?_method=DELETE" method="POST">
-                                        <input type="submit" value="Log Out" />
+                                        
+                                        <button class="uk-button uk-button-text uk-button-small" type="submit"><a href="" class="uk-icon-link" uk-icon="icon: sign-out"></a></button>
                                         <!--redirect to destroy route for sessions-->
                                     </form>
                             </div>  
@@ -26,57 +27,57 @@
                     <div class="uk-navbar uk-navbar-center-left">
                         <ul class="uk-navbar-nav">
                             <li class="uk-active uk-text-light"><a href="" uk-icon="icon: sign-in" class="uk-icon-link">Sign-in</a></li>
-                            <li>
-                                <div class="uk-width-large" uk-dropdown="animation: slide-top; animate-out: true">
-                                    <form class="uk-form" action="/sessions" method="POST">
-                                        <div class="uk-drop-grid uk-grid-divider uk-child-width-1-2" uk-grid>
-                                            <div>
-                                                <div class="uk-inline">
-                                                    <span class="uk-form-icon" uk-icon="icon: user"></span>
-                                                    <input class="uk-input" type="text" aria-label="Not clickable icon" required type="text" name="username">
-                                                </div>
-                                            </div>
-                                        
-                                            <div>
-                                                <div class="uk-inline">
-                                                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                                                    <input class="uk-input" type="password" aria-label="Not clickable icon" name="password">
-                                                </div>
+                            <div class="uk-width-large" uk-dropdown="animation: slide-top; animate-out: true">
+                                <form class="uk-form" action="/sessions" method="POST">
+                                    <div class="uk-drop-grid uk-grid-divider uk-child-width-1-2" uk-grid>
+                                        <div>
+                                            <div class="uk-inline">
+                                                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                                                <input class="uk-input" type="text" aria-label="Not clickable icon" required type="text" name="username">
                                             </div>
                                         </div>
-                                        <!-- this button should go to the route function that logs in and redirect back to index, 
-                                                    <form action="/sessions" method="POST">
-                                                    Username: <input required type="text" name="username"/><br>
-                                                    Password: <input required type="text" name="password"><br>
-                                                    <input type="submit" name="" value="Login"/> -->
-                                        <button class="uk-button uk-button-primary uk-width-1-1 uk-margin uk-flex-center">Button</button>
-                                        
-                                    </form>
-                                    <a href="#signup" class="uk-icon-link uk-align-right uk-text-primary" uk-icon="user" uk-toggle><span uk-icon="icon: plus"> sign up </span></a>
-                                    <div id="signup" class="uk-border-rounded" uk-offcanvas="flip: true">
-                                        <div class="uk-offcanvas-bar">
-                                            <h1>Sign Up</h1>
-                                                <form action="/users" method="POST">
-                                                    Username: <input required type="text" name="username"/><br>
-                                                    Password: <input required type="text" name="password"><br>
-                                                    <input type="submit" name="" value="Sign Up"/>
-                                                </form>
+                                    
+                                        <div>
+                                            <div class="uk-inline">
+                                                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                                                <input class="uk-input" type="password" aria-label="Not clickable icon" name="password">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>  
-                            </li>
+                                    <!-- this button should go to the route function that logs in and redirect back to index, 
+                                                <form action="/sessions" method="POST">
+                                                Username: <input required type="text" name="username"/><br>
+                                                Password: <input required type="text" name="password"><br>
+                                                <input type="submit" name="" value="Login"/> -->
+                                    <button class="uk-button uk-button-primary uk-width-1-1 uk-margin uk-flex-center">Sign In</button>
+                                    
+                                </form>
+                                <a href="#signup" class="uk-icon-link uk-align-right uk-text-primary" uk-icon="icon: user; ratio: 0.75" uk-toggle><span uk-icon="icon: plus; ratio: 0.75"> sign up </span></a>
+                                <div id="signup" class="uk-border-rounded" uk-offcanvas="flip: true">
+                                    <div class="uk-offcanvas-bar">
+                                        <h1>Sign Up</h1>
+                                            <form action="/users" method="POST">
+                                                Username: <input required type="text" name="username"/><br>
+                                                Password: <input required type="text" name="password"><br>
+                                                <input type="submit" name="" value="Sign Up"/>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div>  
+                            
                         </ul>
                     </div>
                 <% } %>
             
                 <!-- Listophonic logo-->
-                    <a class="uk-navbar-item uk-logo " href="#"><img src="/assets/listophonic.png" width="40px"> Listophonic </span>
+                    <a class="uk-navbar-item uk-logo " href="#"><img src="/assets/listophonic.png" width="40px"> Listophonic </a>
                 
-    
+                
+                
 
                 <!-- Add student button -->
                 <% if(providers){ %>
-                    <div class="uk-navbar-center-right">
+                    <div class="uk-navbar-item uk-navbar-center-right uk-flex uk-flex-middle">
                         <a href="#offcanvas-usage" uk-icon="icon: plus; ratio:1" uk-toggle><span uk-icon="icon: user; ratio:1"></span></a>
                         <%- include ("./addStudentModal.ejs", {providers}) %>
                     </div>

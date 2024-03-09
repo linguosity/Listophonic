@@ -22,16 +22,20 @@
               
                 <% for(a=0; a < wordList.length; a++){ %>
                     <tr>
+                      <%if(wordList[a] !== ''){ %>
                         <td><%= wordList[a] %></td>
-                        <input value="<%=wordList[a]%>" form="form<%=student._id%>" name="words[]" type="hidden">
-                        <td><% if(phrases && phrases.length>0){ %>
-                            <%= phrases[a]; %>
-                            <% } %>
-                          </td>
-                        <td><% if(sentences && sentences.length>0){ %>
-                            <%= sentences[a];%>
-                            <% } %>
-                          </td>
+
+                              <!-- Array serialization adapted from Stack Overflow user response: https://stackoverflow.com/questions/9073690/post-an-array-from-an-html-form-without-javascript -->
+                              <input value="<%=wordList[a]%>" form="form<%=student._id%>" name="words[]" type="hidden">
+                              <td><% if(phrases && phrases.length>0){ %>
+                                  <%= phrases[a]; %>
+                                  <% } %>
+                                </td>
+                              <td><% if(sentences && sentences.length>0){ %>
+                                  <%= sentences[a];%>
+                                  <% } %>
+                              </td>
+                           <% } %> 
                     </tr>
                 <% } %>
           

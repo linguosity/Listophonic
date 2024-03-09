@@ -29,9 +29,6 @@
                                     <option value="<%=i%>"><%=i%></option>
                                 <%} %>
                             <% } %>
-                            
-                            
-
                         </select>
                     </div>
                 </div>
@@ -52,30 +49,102 @@
                     </div>
                 </div>
             </div>
-            <!-- Add target sound-->
-            <div class="uk-text-center" uk-grid>
-                <div class="uk-width-auto@m">
-                    <label class="uk-form-label" for="form-stacked-select"><span uk-icon="crosshairs"></span> Target</label>
-                    <div class="uk-form-controls">
-                        <select class="uk-select uk-form-width-xsmall" id="form-stacked-select" name="targetSound">
-                            <% for(b=0;b<soundArray.length;b++) { %>
-                                <% if(soundArray[b]===student.targetSound){ %>
-                                    <option value="<%=student.targetSound %>" selected><%=student.targetSound%></option>
-                                <% } else { %>
-                                    <option value="<%=soundArray[b]%>"><%=soundArray[b]%></option>
-                                <%} %>
-                            <% } %>
-                        </select>
+
+            <div class="uk-child-width-1-2 uk-text-center" uk-grid>
+                <!-- Add target sound-->
+                <div class="uk-text-center" uk-grid>
+                    <div class="uk-width-auto@m">
+                        <label class="uk-form-label" for="form-stacked-select"><span uk-icon="crosshairs"></span> Target</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select uk-form-width-xsmall" id="form-stacked-select" name="targetSound">
+                                <% for(b=0;b<soundArray.length;b++) { %>
+                                    <% if(soundArray[b]===student.targetSound){ %>
+                                        <option value="<%=student.targetSound %>" selected><%=student.targetSound%></option>
+                                    <% } else { %>
+                                        <option value="<%=soundArray[b]%>"><%=soundArray[b]%></option>
+                                    <%} %>
+                                <% } %>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            
+                <!-- excluded sounds
+                <div>
+                    <div>
+                        <label class="uk-form-label" for="form-stacked-text"><span uk-icon="ban"></span> Exclude</label>
+                        <select class="uk-select uk-form-width-xsmall" id="form-stacked-select" name="excludedSounds">                                                             
+                            <optgroup label="Stops">
+                                <option value="p">p</option>
+                                <option value="b">b</option>
+                                <option value="t">t</option>
+                                <option value="d">d</option>
+                                <option value="k">k</option>
+                                <option value="g">g</option>
+                            </optgroup>
+                            <optgroup label="Fricatives">
+                                <option value="f">f</option>
+                                <option value="v">v</option>
+                                <option value="θ">θ</option>
+                                <option value="ð">ð</option>
+                                <option value="s">s</option>
+                                <option value="z">z</option>
+                                <option value="ʃ">ʃ</option>
+                                <option value="ʒ">ʒ</option>
+                                <option value="h">h</option>
+                            </optgroup>
+                            <optgroup label="Affricates">
+                                <option value="tʃ">tʃ</option>
+                                <option value="dʒ">dʒ</option>
+                            </optgroup>
+                            <optgroup label="Nasals">
+                                <option value="m">m</option>
+                                <option value="n">n</option>
+                                <option value="ŋ">ŋ</option>
+                            </optgroup>
+                            <optgroup label="Liquids">
+                                <option value="l">l</option>
+                                <option value="r">r</option>
+                            </optgroup>
+                            <optgroup label="Glides">
+                                <option value="w">w</option>
+                                <option value="j">j</option>
+                            </optgroup>
+                            <optgroup label="Two-element clusters">
+                                <option value="pr">pr</option>
+                                <option value="br">br</option>
+                                <option value="kr">kr</option>
+                                <option value="gr">gr</option>
+                                <option value="fr">fr</option>
+                                <option value="θr">θr</option>
+                                <option value="ʃr">ʃr</option>
+                                <option value="tʃr">tʃr</option>
+                                <option value="dʒr">dʒr</option>
+                                <option value="sn">sn</option>
+                                <option value="sl">sl</option>
+                                <option value="st">st</option>
+                                <option value="sp">sp</option>
+                                <option value="sm">sm</option>
+                            </optgroup>
+                            <optgroup label="Three-element clusters">
+                                <option value="spr">spr</option>
+                                <option value="str">str</option>
+                                <option value="skr">skr</option>
+                                <option value="skw">skw</option>
+                                <option value="spl">spl</option>
+                                <option value="skl">skl</option>
+                                <option value="sʃr">sʃr</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div> -->
+            </div>
                 <!-- Add word position-->
                 <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid uk-flex-center uk-width-auto@m">
                     <label><input class="uk-radio" type="radio" name="wordPosition" <% let wordPos = student.wordPosition === 'initial'? 'checked' : '' %>>initial</label>
                     <label><input class="uk-radio" type="radio" name="wordPosition">medial</label>
                     <label><input class="uk-radio" type="radio" name="wordPosition">final</label>
                 </div>
-            </div>
+            
 
             <!-- Add max syllables-->
             <div class="uk-margin">
@@ -104,10 +173,10 @@
                 </div>
                 <div class="uk-grid uk-grid-column-small uk-grid-row-small">
                     <div class="uk-width-1-2">
-                        <input class="uk-input uk-form-small" type="text" aria-label="20" name="realWords[]" value="<%=student.realWords[4];%>">
+                        <input class="uk-input uk-form-small" type="text" aria-label="20" name="nonsenseWords[]" value="<%=student.nonsenseWords[0];%>">
                     </div>
                     <div class="uk-width-1-2">
-                        <input class="uk-input uk-form-small" type="text"aria-label="20" name="realWords[]" value="<%=student.realWords[5];%>">
+                        <input class="uk-input uk-form-small" type="text"aria-label="20" name="nonsenseWords[]" value="<%=student.nonsenseWords[1];%>">
                     </div>
                 </div>
                 
@@ -124,6 +193,7 @@
                 <% } %>
                 
             </div>
+            
             <!-- Add studentID-->
             <input value="<%=student._id %>" name="student_id" type="hidden">
             <!-- Submit-->
