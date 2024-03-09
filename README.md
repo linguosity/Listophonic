@@ -19,22 +19,24 @@ Empower your speech therapy journey with Listophonic - where organization meets 
 
 # Technologies Used
 
-- JavaScript
-- HTML
-- CSS
-- Express JS
-- Heroku
-- UIkit
-- OpenAI API
-- MongoDB
-- Node JS
-- BCrypt
+-HTML
+-CSS
+-JavaScript
+-UIkit (Front-end framework)
+-Node.js with Express.js framework (Back-end)
+-MongoDB (Database)
+-BCrypt (Security)
+-OpenAI API (External API integration)
+-Heroku (Deployment)
 
 # Getting Started
 
 Click to view latest version of app:
 
 <a href="https://listophonic-b6d534527682.herokuapp.com/main" > Listophonic</a>
+
+Trello board
+https://trello.com/b/hpuLBQdX/listophonic-ga-project-2
 
 # Testimonials
 
