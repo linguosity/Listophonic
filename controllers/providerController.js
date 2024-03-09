@@ -6,6 +6,12 @@ const https = require("https");
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
+//NEW | GET
+// render a new form
+const newForm = (req,res) => {
+
+};
+
 //CREATE | POST
 // manipulate data
 const create = async(req, res) => {
