@@ -9,10 +9,10 @@
         ];%>
             <!-- Add first and last name-->
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text"><span uk-icon="user"></span> New Student</label>
+                <label class="uk-form-label" for="form-stacked-text"><span uk-icon="user"></span> Edit Student</label>
                 <div class="uk-form-controls">
-                    <input class="uk-input uk-form-width-small" id="form-stacked-text" type="text" placeholder="first name" name="firstName" value="<%=student.firstName%>">
-                    <input class="uk-input uk-form-width-small uk-margin" id="form-stacked-text" type="text" placeholder="last name" name="lastName" value="<%=student.lastName%>">
+                    <input class="uk-input uk-form-width-small" id="form-stacked-text" type="text" placeholder="first name" name="firstName" value="<%=student.firstName%>" required>
+                    <input class="uk-input uk-form-width-small uk-margin" id="form-stacked-text" type="text" placeholder="last name" name="lastName" value="<%=student.lastName%>" required>
                 </div>
             </div>
 
@@ -140,16 +140,19 @@
             </div>
                 <!-- Add word position-->
                 <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid uk-flex-center uk-width-auto@m">
-                    <label><input class="uk-radio" type="radio" name="wordPosition" <% let wordPos = student.wordPosition === 'initial'? 'checked' : '' %>>initial</label>
-                    <label><input class="uk-radio" type="radio" name="wordPosition">medial</label>
-                    <label><input class="uk-radio" type="radio" name="wordPosition">final</label>
+                    <!--Conditional rendering for radio button checked attribute based on student's wordPosition value-->
+                    <!-- adapted from ChatGPT advice. -->
+                    <% let wordPos; %>
+                    <label><input class="uk-radio" type="radio" value="word_initial" name="wordPosition" <%= wordPos = student.wordPosition === 'word_initial'? 'checked' : '' %>>initial</label>
+                    <label><input class="uk-radio" type="radio" value="word_medial" name="wordPosition" <%= wordPos = student.wordPosition === 'word_medial'? 'checked' : '' %>>medial</label>
+                    <label><input class="uk-radio" type="radio" value="word_final" name="wordPosition" <%= wordPos = student.wordPosition === 'word_final'? 'checked' : '' %>>final</label>
                 </div>
             
 
             <!-- Add max syllables-->
             <div class="uk-margin">
                 <label>Max syllables</label>
-                <input class="uk-range" type="range" name="maxSyllables" value="student.maxSyllables" min="1" max="5" step="1" aria-label="Range" oninput="sliderFunction(this)" uk-tooltip="hello">
+                <input class="uk-range" type="range" name="maxSyllables" value="student.maxSyllables" min="1" max="5" step="1" aria-label="Range" oninput="sliderFunction(this)">
             </div>
            
             <!-- add 6 words -->

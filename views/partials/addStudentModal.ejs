@@ -8,8 +8,8 @@
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text"><span uk-icon="user"></span> New Student</label>
                 <div class="uk-form-controls">
-                    <input class="uk-input uk-form-width-small" id="form-stacked-text" type="text" placeholder="first name" name="firstName">
-                    <input class="uk-input uk-form-width-small uk-margin" id="form-stacked-text" type="text" placeholder="last name" name="lastName">
+                    <input class="uk-input uk-form-width-small" id="form-stacked-text" type="text" placeholder="first name" name="firstName" required>
+                    <input class="uk-input uk-form-width-small uk-margin" id="form-stacked-text" type="text" placeholder="last name" name="lastName" required>
                 </div>
             </div>
 
@@ -136,7 +136,8 @@
             <!-- Add max syllables-->
             <div class="uk-margin">
                 <label>Max syllables</label>
-                <input class="uk-range" type="range" name="maxSyllables" value="2" min="1" max="5" step="1" aria-label="Range" oninput="sliderFunction(this)" uk-tooltip="hello">
+                <input id="syllSlider" class="uk-range tooltip-add" type="range" name="maxSyllables" value="2" min="1" max="5" step="1" aria-label="Range" oninput="sliderFunction(this)">
+    
             </div>
         
             
