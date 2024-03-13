@@ -107,9 +107,10 @@
 
       <input value="<%=providers._id%>" form="form<%=student._id%>" name="provider_ID" type="hidden">
       <div class="uk-modal-footer uk-flex uk-flex-between"><!-- Button to generate phrases -->
-        <button type="submit" method="GET" class="uk-button-text" style="background: none; border: none; padding: 0;">
+        <button type="submit" class="uk-button-text" onclick="loadSpinnerGenerate()" style="background: none; border: none; padding: 0;">
           <span uk-icon="icon: bolt" class="uk-icon-link"> generate</span>
         </button> 
+        <div id="uk-spinner-generate" style="visibility: hidden;" uk-spinner></div>
         <!-- 
         <button type="submit" method="GET" class="uk-button-text" style="background: none; border: none; padding: 0;">
           <span uk-icon="icon: pencil" class="uk-icon-link"> edit </span>-->

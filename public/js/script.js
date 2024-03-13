@@ -1,8 +1,16 @@
-/*var slider =document.getElementByID("syllSlider");
-var output = document.getElementById("addSyllables");
-output.innerHTML = slider.value; // Display the default slider value
 
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-  output.innerHTML = this.value;
-}*/
+
+// display hidden loading spinner as progress visual for api call on New Student modal
+const loadSpinner = () => {
+    const spinner = document.getElementById("uk-spinner");
+    spinner.style.visibility = "visible";
+}
+
+
+// display hidden loading spinner as progress visual for api call on Generate phrases modal
+const loadSpinnerGenerate = () => {
+    const spinner2 = document.getElementById("uk-spinner-generate");
+    console.log(spinner2);
+    spinner2.style.visibility = "visible";
+
+}
