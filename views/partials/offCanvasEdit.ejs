@@ -197,15 +197,18 @@
                 
             </div>
             <!-- Add phono/artic -->
+            
             <div class="uk-grid-small uk-child-width-auto uk-grid uk-flex-center">
-               <% if(student.phono === 'phono') { %>
+                
+               <% if(student.phono === 'phonological_disorder') { %>
                     <label><input class="uk-radio" type="radio" name="phono" checked>artic</label>
                     <label><input class="uk-radio" type="radio" name="phono">phono</label>
                 <% }else { %>
                     <label><input class="uk-radio" type="radio" name="phono">artic</label>
                      <label><input class="uk-radio" type="radio" name="phono" checked>phono</label>
                 <% } %>
-                
+                <button class="uk-button uk-button-text" uk-toggle="target: #modal-group" type="button"><span uk-icon="icon: info"></span></button>
+                <%- include ("researchModal") %>
             </div>
             
             <!-- Add studentID-->

@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt")
 // Corrected imports using object destructuring based on ChatGPT recommendations [Line 4]
 const { Provider } = require("../models/Provider");
 
-
 router.post('/', async (req, res) => {
 
     try{

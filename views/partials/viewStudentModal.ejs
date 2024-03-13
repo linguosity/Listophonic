@@ -10,7 +10,68 @@
 
     <form action="/main/openAI" method="GET" id="form<%=student._id%>">
       <div class="uk-modal-body">
-        <table class="uk-table uk-table-responsive uk-table-striped">
+          <ul uk-tab>
+            <li><a href="#">Words</a></li>
+            <li><a href="#">Phrases</a></li>
+            <li><a href="#">Sentences</a></li>
+            <li><a href="#">Narrative</a></li>
+        </ul>
+        
+        <ul class="uk-switcher uk-margin">
+          <li>
+              <table class="uk-table uk-table-responsive uk-table-striped"><thead><tr></tr></thead>
+                <tbody>
+                    <% for(a=0; a < wordList.length; a++){ %>
+                    <%if(wordList[a] !== ''){ %>
+                    <tr>
+                      <td>
+                        <input value="<%=wordList[a]%>" form="form<%=student._id%>" name="words[]" type="hidden">
+                        <%= wordList[a] %>
+                      </td>
+                    </tr>
+                    <% }%>
+                    <% } %>
+                </tbody>
+              </table>
+          </li>
+          <li>
+            <table class="uk-table uk-table-responsive uk-table-striped"><thead><tr></tr></thead>
+              <tbody>
+                <% for(a=0; a < wordList.length; a++){ %>
+                <% if(phrases && phrases.length>0){ %>
+                <tr>
+                  <td>
+                    <%= phrases[a]; %>
+                  </td>
+                </tr>
+                <% } %>
+                <% } %>
+              </tbody>
+            </table>
+          </li>
+          <li>
+            <table class="uk-table uk-table-responsive uk-table-striped"><thead><tr></tr></thead>
+              <tbody>
+                <% for(a=0; a < wordList.length; a++){ %>
+                <% if(sentences && sentences.length>0){ %>
+                <tr>
+                  <td>
+                    <%= sentences[a];%>
+                  </td>
+                </tr>
+                <% } %>
+                <% } %>
+              </tbody>
+            </table>
+          </li>
+          <li> 
+            <% if(student.narrative && student.narrative != '') { %>
+              <%= student.narrative %>
+            <%}%>
+          </li>
+          
+          
+        </ul> <!-- 
           <thead>
               <tr>
                   <th>Word</th>
@@ -26,7 +87,7 @@
                         <td><%= wordList[a] %></td>
 
                               <!-- Array serialization adapted from Stack Overflow user response: https://stackoverflow.com/questions/9073690/post-an-array-from-an-html-form-without-javascript -->
-                              <input value="<%=wordList[a]%>" form="form<%=student._id%>" name="words[]" type="hidden">
+                              <!--<input value="<%=wordList[a]%>" form="form<%=student._id%>" name="words[]" type="hidden">
                               <td><% if(phrases && phrases.length>0){ %>
                                   <%= phrases[a]; %>
                                   <% } %>
@@ -39,7 +100,7 @@
                     </tr>
                 <% } %>
           
-          </tbody>
+          </tbody>-->
         </table>
       </div>
       <input value="<%=student._id%>" form="form<%=student._id%>" name="student_ID" type="hidden">

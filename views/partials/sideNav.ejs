@@ -77,9 +77,11 @@
 
                 <!-- Add student button -->
                 <% if(providers){ %>
-                    <div class="uk-navbar-item uk-navbar-center-right uk-flex uk-flex-middle">
-                        <a href="#offcanvas-usage" uk-icon="icon: plus; ratio:1" uk-toggle><span uk-icon="icon: user; ratio:1"></span></a>
-                        <%- include ("./addStudentModal.ejs", {providers}) %>
+                    <div class="uk-tooltip="Add student">
+                        <div class="uk-navbar-item uk-navbar-center-right uk-flex uk-flex-middle">
+                            <a href="#offcanvas-usage" uk-icon="icon: plus; ratio:1" uk-toggle><span uk-icon="icon: user; ratio:1"></span></a>
+                            <%- include ("./addStudentModal.ejs", {providers}) %>
+                        </div>
                     </div>
                 <% } %>
             

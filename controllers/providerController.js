@@ -245,19 +245,20 @@ const generate = async(req,res) => {
     //save studentDI key value pair as local studentID
     let studentID = req.query.student_ID;
     let providerID = req.query.provider_ID;
+    let grade;
 
     try{ 
         const provider = await Provider.findById(providerID);
         const student = await provider.students.id(studentID);
         console.log(student);
+        grade = student.grade;
+
     } catch(err) {
         console.log(err);
     }
     
     try{
-        //call OPENAI API
-        const providers = await Provider.find();
-
+        
         
         //call OpenAI's ChatGPT 3.5 api
         //Source: https://platform.openai.com/docs/api-reference
@@ -267,39 +268,46 @@ const generate = async(req,res) => {
             messages: [
                 { role: "system", content: `
                 You are an expert linguist with tremendous semantic and grammatical knowledge. Given a list of real or nonsense words, 
-                you will create a list of phrases and simple sentences with the user's target words [${words}] embedded. 
+                you will create (1) array of phrases, (2) array of simple sentences and (3) story string with the user's target words [${words}] embedded, all developmentally appropriate
+                for a student in ${grade} grade. Take a deep breath and work through the solution step by step. 
+                I'll tip you $20 upon completion. 
                 
-                Return responses strictly in the following JSON format:
+                Please ensure that your response strictly follows the JSON format below. Use double quotes for strings and object keys, and ensure that all property names and string values are enclosed in double quotes. The response should be a valid JSON object that can be parsed without errors.
 
                     {
-                        'name': 'Phrase and sentence generator',
-                        'description': 'Embed target words in phrases and sentences for articulation practice ',
+                        "name": "Phrase, sentence and story generator",
+                        "description": "Embed target words in phrases, sentences and a story for articulation practice ",
 
-                        'parameters': {
-                        'type': 'object',
+                        "parameters": {
+                        "type": "object",
 
-                        'properties': {
-                            'phrases': {
-                            'type': 'array',
-                            'description: 'a list of exactly 6 prepositional phrases such as "in the book" OR noun phrases such as "the blue dog" with the following words embedded: ${words}'
-                            'examples': [],
+                        "properties": {
+                            "phrases": {
+                            "type": "array",
+                            "description": "a list of exactly 6 prepositional phrases such as 'in the book' OR noun phrases such as 'the blue dog' at the ${grade} grade level with the following words embedded: ${words}"
+                            "examples": [],
                             },
 
-                            'sentence': {
-                            'type': 'array',
-                            'description': 'a list of exactly 6 short simple sentences with the following words embedded: ${words}',
-                            'examples': [],
+                            "sentences": {
+                                "type": "array",
+                                "description": "a list of exactly 6 short simple sentences at the ${grade} grade level with the following words embedded: ${words}",
+                                "examples": [],
                             },
+                            "story": {
+                                "type": "string",
+                                "description": "a story string at the ${grade} grade level with the following words embedded: ${words}",
+                                "example": "",
+                            },
+
+                            
                         },
-                        'required': ['phrases', 'sentences']
+                        "required": ["phrases", "sentences", "story"]
                         }
                     }
 
-                Take a deep breath and work through the solution step by step. I'll tip you $20 upon completion. 
-
                 ` },
                 { role: "user", content: `
-                    'wordList': ${words}
+                    "wordList": ${words}
                 ` }
                 // Add more messages as needed
             ]
@@ -325,31 +333,65 @@ const generate = async(req,res) => {
             });
 
             apiResponse.on('end', async () => {
-                
-                let newData = JSON.parse(data);
-                newData = JSON.parse(newData.choices[0].message.content);
-
-                let phrases = newData.parameters.properties.phrases.examples;
-                let sentences = newData.parameters.properties.sentences.examples;
-                
-
                 try{
-                    //save phrases and sentences in target Student schema & updated sub and parent schemas
-                    const provider = await Provider.findById(providerID);
-                    const student = provider.students.id(studentID);
+                    console.log("Here's the DATA", data);
+                    // Assuming 'data' is the JSON object you received from the API
+                    let parsedData = JSON.parse(data);
 
-                    student.phrases=phrases;
-                    student.sentences=sentences;
-                    await provider.save();
+                    //let responseData = JSON.parse(data.choices[0].message.content);
                     
-                    res.redirect('/');
-                    // Lines 347 & 352 were revised to improve response handling in order to prevent 'ERR_HTTP_HEADERS_SENT' error
-                    //Source: ChatGPT
-                    return;
 
-                }catch(err){
+                    if (parsedData.choices && parsedData.choices.length > 0) {
+
+                        let content = JSON.parse(parsedData.choices[0].message.content);
+                        console.log(content);
+                        console.log("Here's the content", content.parameters.properties.phrases);
+
+                        console.log("Here's the content", content.parameters.properties.sentences);
+
+                        console.log("Here's the content", content.parameters.properties.story);
+                        console.log(typeof content.parameters.properties.story.example); // Should be 'string'
+
+
+                        let phrases = content.parameters.properties.phrases.examples;
+                        let sentences = content.parameters.properties.sentences.examples;
+                    
+                        let narrative = content.parameters.properties.story.example;
+
+
+
+                        try{
+                            //save phrases and sentences in target Student schema & updated sub and parent schemas
+                            const provider = await Provider.findById(providerID);
+                            const student = provider.students.id(studentID);
+
+                            student.phrases=phrases;
+                            student.sentences=sentences;
+                            if (typeof narrative === 'string') {
+                                student.narrative = narrative;
+                            } else {
+                                // Handle the case where narrative is not a string
+                                console.log('Narrative is not a string:', narrative);
+                            }
+                            
+                            //student.narrative=narrative;
+                            await provider.save();
+                            
+                            res.redirect('/');
+                            // Lines 347 & 352 were revised to improve response handling in order to prevent 'ERR_HTTP_HEADERS_SENT' error
+                            //Source: ChatGPT
+                            return;
+
+                        }catch(err){
+                            console.log(err);
+                            return;
+                        }
+
+                    } else {
+                        throw new Error('No choices in response');
+                    }
+                } catch(err) {
                     console.log(err);
-                    return;
                 }
 
                 
