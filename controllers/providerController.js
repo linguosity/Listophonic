@@ -284,18 +284,18 @@ const generate = async(req,res) => {
                         "properties": {
                             "phrases": {
                             "type": "array",
-                            "description": "a list of exactly 6 prepositional phrases such as 'in the book' OR noun phrases such as 'the blue dog' at the ${grade} grade level with the following words embedded: ${words}"
+                            "description": "a list of exactly 6 prepositional phrases such as 'in the book' OR noun phrases such as 'the blue dog' at the ${grade} grade level with the following words embedded within <mark></mark> tags and properly escaped: ${words}"
                             "examples": [],
                             },
 
                             "sentences": {
                                 "type": "array",
-                                "description": "a list of exactly 6 short simple sentences at the ${grade} grade level with the following words embedded: ${words}",
+                                "description": "a list of exactly 6 short simple sentences at the ${grade} grade level with the following words embedded within <mark></mark> tags and properly escaped: ${words}",
                                 "examples": [],
                             },
                             "story": {
                                 "type": "string",
-                                "description": "a story string at the ${grade} grade level with the following words embedded: ${words}",
+                                "description": "a story string at the ${grade} grade level with the following words embedded within <mark></mark> tags and properly escaped: ${words}",
                                 "example": "",
                             },
 

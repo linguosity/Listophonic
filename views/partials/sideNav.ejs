@@ -24,11 +24,14 @@
                 <% } else { %>
                     <!--    <li><a class="nav-link" href="/users/new">Sign Up</a></li>
                     <li><a class="nav-link" href="/sessions/new">Log In</a></li>    -->
+                    
                     <div class="uk-navbar uk-navbar-center-left">
                         <ul class="uk-navbar-nav">
                             <li class="uk-active uk-text-light"><a href="" uk-icon="icon: sign-in" class="uk-icon-link">Sign-in</a></li>
                             <div class="uk-width-large" uk-dropdown="animation: slide-top; animate-out: true">
                                 <form class="uk-form" action="/sessions" method="POST">
+
+                                    <!-- sign in form-->
                                     <div class="uk-drop-grid uk-grid-divider uk-child-width-1-2" uk-grid>
                                         <div>
                                             <div class="uk-inline">
@@ -44,13 +47,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- this button should go to the route function that logs in and redirect back to index, 
-                                                <form action="/sessions" method="POST">
-                                                Username: <input required type="text" name="username"/><br>
-                                                Password: <input required type="text" name="password"><br>
-                                                <input type="submit" name="" value="Login"/> -->
                                     <button class="uk-button uk-button-primary uk-width-1-1 uk-margin uk-flex-center">Sign In</button>
-                                    
+                                    <!--end of sign-in form-->
                                 </form>
                                 <a href="#signup" class="uk-icon-link uk-align-right uk-text-primary" uk-icon="icon: user; ratio: 0.75" uk-toggle><span uk-icon="icon: plus; ratio: 0.75"> sign up </span></a>
                                 <div id="signup" class="uk-border-rounded" uk-offcanvas="flip: true">
